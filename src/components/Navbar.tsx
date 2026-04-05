@@ -32,6 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
           <button className="nav-link" onClick={() => scrollToSection('hero')}>Home</button>
           <button className="nav-link" onClick={() => scrollToSection('about')}>About</button>
           <button className="nav-link" onClick={() => scrollToSection('skills')}>Skills</button>
+          {/* <button className="nav-link" onClick={() => scrollToSection('products')}>Products</button> */}
           <button className="nav-link" onClick={() => scrollToSection('services')}>Services</button>
           <button className="nav-link" onClick={() => scrollToSection('contact')}>Contact</button>
         </div>

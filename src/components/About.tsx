@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaAward, FaUsers, FaProjectDiagram, FaLightbulb } from 'react-icons/fa';
+import { FaAward, FaUsers, FaProjectDiagram, FaLightbulb, FaBrain } from 'react-icons/fa';
 import './About.css';
 
 interface Stat {
@@ -16,45 +16,45 @@ interface ValueItem {
 
 const About: React.FC = () => {
   const stats: Stat[] = [
-    { icon: <FaAward />, number: '10+', label: 'Years Experience' },
-    { icon: <FaProjectDiagram />, number: '100+', label: 'Projects Completed' },
-    { icon: <FaUsers />, number: '50+', label: 'Happy Clients' },
-    { icon: <FaLightbulb />, number: '15+', label: 'Tech Stack' }
+    { icon: <FaBrain />, number: '5+', label: 'AI Dreamers' },
+    { icon: <FaProjectDiagram />, number: '15+', label: 'Tech Stack Mastered' },
+    { icon: <FaUsers />, number: '24/7', label: 'Startup Hustle' },
+    { icon: <FaAward />, number: '100%', label: 'Passion Level' }
   ];
 
   const values: ValueItem[] = [
     {
       number: '01',
-      title: 'Innovation First',
-      description: 'Leveraging the latest technologies to create breakthrough solutions'
+      title: '🚀 Innovation Driven',
+      description: 'We dream in code and think in algorithms - always pushing the boundaries of what\'s possible'
     },
     {
       number: '02',
-      title: 'Quality Driven',
-      description: 'Maintaining the highest standards in every line of code we write'
+      title: '🏆 Results Guaranteed',
+      description: 'Your success is our mission. We deliver solutions that drive real business impact'
     },
     {
       number: '03',
-      title: 'Client Focused',
-      description: 'Your success is our success, we\'re committed to your growth'
+      title: '⚡ Lightning Execution',
+      description: 'From concept to launch in record time - because great ideas deserve rapid execution'
     }
   ];
 
   return (
     <section id="about" className="section about-section">
-      <h2 className="section-title">About ZealInfy</h2>
+      <h2 className="section-title">Meet the AI Dreamers</h2>
       <p className="section-subtitle">
-        Passionate about building cutting-edge solutions that drive business success
+        We're not just developers - we're passionate innovators obsessed with building the future
       </p>
 
       <div className="about-content">
         <div className="about-text">
-          <h3 className="about-heading">Who We Are</h3>
+          <h3 className="about-heading">Why Choose ZealInfy?</h3>
           <p className="about-description">
-            At <span className="highlight">ZealInfy</span>, we are dedicated to transforming your vision into reality through innovative technology solutions. With expertise spanning across multiple domains including .NET, React, Python, and AI, we deliver robust and scalable applications that exceed expectations.
+            At <span className="highlight">ZealInfy</span>, we're a fresh team of <strong>AI dreamers</strong> who live and breathe technology innovation. We're not just another development team - we're passionate builders ready to craft intelligent solutions that will transform businesses.
           </p>
           <p className="about-description">
-            Our commitment to excellence and continuous learning ensures that we stay at the forefront of technology trends, providing our clients with modern, efficient, and future-proof solutions.
+            As a startup ourselves, we understand the hustle, the vision, and the drive it takes to build something amazing. We're here to be your <strong>technical co-founders</strong> - bringing cutting-edge AI and development expertise to turn your startup dreams into reality.
           </p>
           
           <div className="about-values">

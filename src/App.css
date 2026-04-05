@@ -2,6 +2,29 @@
   text-align: center;
   position: relative;
   min-height: 100vh;
+  overflow-x: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Dynamic background based on current section */
+.App[data-current-section="hero"] {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+}
+
+.App[data-current-section="about"] {
+  background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
+}
+
+.App[data-current-section="skills"] {
+  background: linear-gradient(180deg, #334155 0%, #475569 100%);
+}
+
+.App[data-current-section="services"] {
+  background: linear-gradient(180deg, #475569 0%, #1e293b 100%);
+}
+
+.App[data-current-section="contact"] {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
 }
 
 .section {
@@ -10,7 +33,25 @@
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: slideInUp 0.8s ease forwards;
 }
+
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger animation for sections */
+.section:nth-child(2) { animation-delay: 0.1s; }
+.section:nth-child(3) { animation-delay: 0.2s; }
+.section:nth-child(4) { animation-delay: 0.3s; }
+.section:nth-child(5) { animation-delay: 0.4s; }
+.section:nth-child(6) { animation-delay: 0.5s; }
+.section:nth-child(7) { animation-delay: 0.6s; }
 
 .section-title {
   font-size: 3rem;
@@ -22,6 +63,17 @@
   background-clip: text;
   text-transform: uppercase;
   letter-spacing: 2px;
+  position: relative;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+  }
 }
 
 .section-subtitle {

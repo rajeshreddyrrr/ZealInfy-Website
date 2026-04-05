@@ -54,19 +54,19 @@ const Contact: React.FC = () => {
     {
       icon: <FaEnvelope />,
       title: 'Email',
-      content: 'info@zealinfy.com',
-      link: 'mailto:info@zealinfy.com'
+      content: 'connect@zealinfy.com',
+      link: 'mailto:connect@zealinfy.com'
     },
     {
       icon: <FaPhone />,
       title: 'Phone',
-      content: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      content: '+91 99663 67270',
+      link: 'tel:+919966367270'
     },
     {
       icon: <FaMapMarkerAlt />,
-      title: 'Location',
-      content: 'Worldwide Remote',
+      title: 'Office Address',
+      content: 'WeWork, K Raheja Mindspace, Survey No 64, Building Number 9, 13th Floor, Madhapur, Hyderabad, Telangana 500081',
       link: null
     }
   ];
@@ -79,16 +79,16 @@ const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="section contact-section">
-      <h2 className="section-title">Get In Touch</h2>
+      <h2 className="section-title">🚀 Let\'s Build Something Amazing Together</h2>
       <p className="section-subtitle">
-        Let's discuss how we can help bring your project to life
+        Ready to turn your vision into reality? Our AI dreamers are standing by to make it happen!
       </p>
 
       <div className="contact-content">
         <div className="contact-info-container">
-          <h3 className="contact-info-title">Contact Information</h3>
+          <h3 className="contact-info-title">💬 Start Your Project Today</h3>
           <p className="contact-info-description">
-            Reach out to us through any of these channels. We're here to help!
+            Connect with our team of passionate AI dreamers. From startup MVPs to enterprise solutions - we\'re here to accelerate your success!
           </p>
 
           <div className="contact-info-list">
@@ -131,9 +131,9 @@ const Contact: React.FC = () => {
         <div className="contact-form-container">
           {submitted ? (
             <div className="success-message">
-              <div className="success-icon">✓</div>
-              <h3>Message Sent Successfully!</h3>
-              <p>We'll get back to you as soon as possible.</p>
+              <div className="success-icon">🏆</div>
+              <h3>Awesome! We Got Your Message!</h3>
+              <p>Our AI dreamers will connect with you within 24 hours. Get ready to build something incredible!</p>
             </div>
           ) : (
             <form className="contact-form" onSubmit={handleSubmit}>
@@ -146,7 +146,7 @@ const Contact: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  placeholder="John Doe"
+                  placeholder="Your awesome name"
                 />
               </div>
 
@@ -159,7 +159,7 @@ const Contact: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  placeholder="john@example.com"
+                  placeholder="your.email@company.com"
                 />
               </div>
 
@@ -172,7 +172,7 @@ const Contact: React.FC = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  placeholder="Project Discussion"
+                  placeholder="Let's discuss your game-changing idea!"
                 />
               </div>
 
@@ -185,12 +185,12 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  placeholder="Tell us about your project..."
+                  placeholder="Describe your vision... What incredible solution do you want to build? Our AI dreamers are excited to hear about it! 🚀"
                 ></textarea>
               </div>
 
               <button type="submit" className="submit-button">
-                Send Message
+                🚀 Launch My Project
               </button>
             </form>
           )}

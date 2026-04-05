@@ -116,9 +116,6 @@ const Footer: React.FC = () => {
             <p>
               © {currentYear} <span className="brand-name">ZealInfy</span>. All rights reserved.
             </p>
-            <p className="made-with">
-              Made with <FaHeart className="heart-icon" /> and React
-            </p>
           </div>
         </div>
       </div>

@@ -22,36 +22,36 @@ const Hero: React.FC = () => {
       <div className="hero-content">
         <div className="hero-text">
           <h1 className="hero-title">
-            Welcome to <span className="gradient-text">ZealInfy</span>
+            Welcome to <span className="gradient-text">ZealInfy</span> where passion meets with AI
           </h1>
           <p className="hero-subtitle">
             Transforming Ideas into Reality with Modern Technology
           </p>
           <p className="hero-description">
-            Expert solutions in Full-Stack Development, Cloud Technologies, and AI Integration
+            Partner with passionate AI dreamers who deliver cutting-edge web applications, intelligent automation, and scalable cloud solutions that drive real business results.
           </p>
           
           <div className="hero-features">
             <div className="feature-item">
-              <FaCode className="feature-icon" />
-              <span>Modern Development</span>
-            </div>
-            <div className="feature-item">
               <FaRocket className="feature-icon" />
-              <span>Fast Delivery</span>
+              <span>Lightning-Fast Delivery</span>
             </div>
             <div className="feature-item">
               <FaBrain className="feature-icon" />
-              <span>AI Powered</span>
+              <span>AI-Powered Solutions</span>
+            </div>
+            <div className="feature-item">
+              <FaCode className="feature-icon" />
+              <span>Enterprise-Grade Quality</span>
             </div>
           </div>
 
           <div className="hero-buttons">
             <button className="btn-primary" onClick={scrollToContact}>
-              Get Started
+              🚀 Start Your Project
             </button>
             <button className="btn-secondary" onClick={scrollToAbout}>
-              Learn More
+              See Our Work
             </button>
           </div>
         </div>

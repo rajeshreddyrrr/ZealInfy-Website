@@ -156,14 +156,14 @@
 }
 
 .card-2 {
-  top: 15%;
-  right: 15%;
+  top: 10%;
+  right: 10%;
   animation-delay: 0.5s;
 }
 
 .card-3 {
-  bottom: 20%;
-  left: 5%;
+  bottom: 15%;
+  left: 10%;
   animation-delay: 1s;
 }
 

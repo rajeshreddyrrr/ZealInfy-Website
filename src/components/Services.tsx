@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCode, FaMobile, FaCloud, FaBrain, FaServer, FaPalette } from 'react-icons/fa';
+import { FaCode, FaMobile, FaCloud, FaBrain, FaServer, FaRocket } from 'react-icons/fa';
 import './Services.css';
 
 interface Service {
@@ -12,40 +12,40 @@ interface Service {
 const Services: React.FC = () => {
   const services: Service[] = [
     {
-      icon: <FaCode />,
-      title: 'Full-Stack Development',
-      description: 'End-to-end web application development using .NET Core, React, and Angular. Building scalable and performant applications tailored to your needs.',
-      features: ['Custom Web Apps', 'API Development', 'Database Design', 'Clean Architecture']
-    },
-    {
-      icon: <FaMobile />,
-      title: 'Desktop Applications',
-      description: 'Professional Windows desktop applications using WinForms and WPF. Creating powerful enterprise solutions with rich user interfaces.',
-      features: ['WinForms Apps', 'WPF Solutions', 'Enterprise Software', 'Legacy Migration']
-    },
-    {
-      icon: <FaCloud />,
-      title: 'Cloud Solutions',
-      description: 'Azure cloud integration and deployment services. Leveraging Microsoft Azure for scalable, reliable, and secure cloud infrastructure.',
-      features: ['Azure Deployment', 'Cloud Migration', 'DevOps Setup', 'Microservices']
+      icon: <FaRocket />,
+      title: 'AI-Powered Web Apps',
+      description: 'Launch faster, scale smarter. We build intelligent web applications that adapt and learn, giving you a competitive edge in the digital marketplace.',
+      features: ['Smart Automation', 'Predictive Analytics', 'Real-time Insights', 'Scalable Architecture']
     },
     {
       icon: <FaBrain />,
-      title: 'AI Integration',
-      description: 'Intelligent solutions powered by artificial intelligence and machine learning. Implementing AI features to enhance your applications.',
-      features: ['ML Models', 'Natural Language', 'Data Analytics', 'Automation']
+      title: 'Enterprise AI Solutions',
+      description: 'Transform your business operations with custom AI that works. From chatbots to data analysis, we make artificial intelligence work for your bottom line.',
+      features: ['Custom AI Models', 'Business Intelligence', 'Process Automation', 'Data-Driven Decisions']
+    },
+    {
+      icon: <FaCloud />,
+      title: 'Cloud Infrastructure',
+      description: 'Scale without limits. Our cloud solutions ensure your applications perform flawlessly whether you have 10 users or 10 million.',
+      features: ['Auto-Scaling', '99.9% Uptime', 'Global Distribution', 'Security First']
+    },
+    {
+      icon: <FaMobile />,
+      title: 'Modern Frontend Experiences',
+      description: 'First impressions matter. We create stunning, responsive interfaces that convert visitors into customers and keep them coming back.',
+      features: ['React/Next.js', 'Mobile-First Design', 'Performance Optimized', 'SEO Ready']
     },
     {
       icon: <FaServer />,
-      title: 'Backend Development',
-      description: 'Robust backend systems using ASP.NET Core and Python. Building RESTful APIs, microservices, and server-side logic.',
-      features: ['RESTful APIs', 'LINQ Queries', 'Data Processing', 'Security']
+      title: 'Backend That Never Fails',
+      description: 'Rock-solid foundations for growth. Our backend systems handle millions of requests while keeping your data secure and your business running 24/7.',
+      features: ['Microservices', 'API Development', 'Database Optimization', 'Security Hardened']
     },
     {
-      icon: <FaPalette />,
-      title: 'Modern UI/UX',
-      description: 'Beautiful and responsive user interfaces using React and modern CSS. Creating engaging experiences that users love.',
-      features: ['Responsive Design', 'React Components', 'Modern UI', 'Animations']
+      icon: <FaCode />,
+      title: 'MVP to Market Leader',
+      description: 'Start smart, grow fast. We help startups validate ideas with rapid MVPs, then scale them into market-leading platforms.',
+      features: ['Rapid Prototyping', 'User Testing', 'Iterative Development', 'Growth Engineering']
     }
   ];
 
@@ -58,9 +58,9 @@ const Services: React.FC = () => {
 
   return (
     <section id="services" className="section services-section">
-      <h2 className="section-title">Our Services</h2>
+      <h2 className="section-title">Solutions That Drive Results</h2>
       <p className="section-subtitle">
-        Comprehensive solutions to bring your ideas to life
+        From concept to scale - we build digital products that customers love and businesses depend on
       </p>
 
       <div className="services-grid">
@@ -83,19 +83,19 @@ const Services: React.FC = () => {
             </ul>
 
             <button className="service-button">
-              Learn More
+              🚀 Let\'s Build This!
             </button>
           </div>
         ))}
       </div>
 
       <div className="services-cta">
-        <h3 className="cta-title">Ready to Start Your Project?</h3>
+        <h3 className="cta-title">🚀 Ready to Disrupt Your Industry?</h3>
         <p className="cta-description">
-          Let's discuss how we can help transform your ideas into reality
+          Ready to be our first success story? Let's turn your vision into the next big thing in the digital world.
         </p>
         <button className="cta-button" onClick={scrollToContact}>
-          Get In Touch
+          💬 Start Your Project Today
         </button>
       </div>
     </section>

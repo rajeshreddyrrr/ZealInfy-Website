@@ -1,0 +1,67 @@
+/* Status Indicator Styles */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 20px;
+  font-size: 14px;
+  color: #cbd5e1;
+  backdrop-filter: blur(10px);
+}
+
+.status-icon {
+  font-size: 8px;
+  animation: pulse 2s infinite;
+}
+
+.status-icon.online {
+  animation: pulse-green 2s infinite;
+}
+
+.status-icon.developing {
+  animation: pulse-blue 2s infinite;
+}
+
+.status-icon.away {
+  animation: pulse-yellow 2s infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { 
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  50% { 
+    opacity: 0.7;
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes pulse-blue {
+  0%, 100% { 
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% { 
+    opacity: 0.7;
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+@keyframes pulse-yellow {
+  0%, 100% { 
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  }
+  50% { 
+    opacity: 0.7;
+    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+  }
+}
+
+.status-message {
+  font-weight: 500;
+}

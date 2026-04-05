@@ -110,8 +110,4 @@ Update content in the respective component files:
 
 ## 🤝 Support
 
-For support, email info@zealinfy.com
-
----
-
-**Made with ❤️ and React**
+For support, email connect@zealinfy.com
