@@ -17,6 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      window.history.pushState(null, '', `#${id}`);
       setMenuOpen(false);
     }
   };

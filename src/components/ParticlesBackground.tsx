@@ -54,6 +54,15 @@ const ParticlesBackground: React.FC = () => {
     let animationFrameId: number;
     let particles: Particle[] = [];
 
+    // Create particles
+    const createParticles = (): void => {
+      const particleCount = Math.min(100, Math.floor((canvas.width * canvas.height) / 15000));
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle(canvas.width, canvas.height));
+      }
+    };
+
     // Set canvas size
     const resizeCanvas = (): void => {
       canvas.width = window.innerWidth;
@@ -63,15 +72,6 @@ const ParticlesBackground: React.FC = () => {
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-
-    // Create particles
-    const createParticles = (): void => {
-      const particleCount = Math.min(100, Math.floor((canvas.width * canvas.height) / 15000));
-      particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle(canvas.width, canvas.height));
-      }
-    };
 
     createParticles();
 

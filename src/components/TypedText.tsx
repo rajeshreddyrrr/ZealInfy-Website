@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './TypedText.css';
 
 interface TypedTextProps {
   text: string;

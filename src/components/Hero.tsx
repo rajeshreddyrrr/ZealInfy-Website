@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaCode, FaRocket, FaBrain } from 'react-icons/fa';
+import TypedText from './TypedText';
 import './Hero.css';
 
 const Hero: React.FC = () => {
+  const [phraseIndex, setPhraseIndex] = useState<number>(0);
+  const phrases = [
+    'AI-Powered Web Applications',
+    'Intelligent Automation Workflows',
+    'Scalable Cloud Platforms',
+    'Data-Driven Growth Engines'
+  ];
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setPhraseIndex((prev) => (prev + 1) % phrases.length);
+    }, 7000);
+
+    return () => window.clearInterval(interval);
+  }, [phrases.length]);
+
   const scrollToContact = (): void => {
     const element = document.getElementById('contact');
     if (element) {
@@ -22,10 +39,10 @@ const Hero: React.FC = () => {
       <div className="hero-content">
         <div className="hero-text">
           <h1 className="hero-title">
-            Welcome to <span className="gradient-text">ZealInfy</span> where passion meets with AI
+            Welcome to <span className="gradient-text">ZealInfy</span>, where passion meets AI.
           </h1>
           <p className="hero-subtitle">
-            Transforming Ideas into Reality with Modern Technology
+            Delivering <TypedText key={phraseIndex} text={phrases[phraseIndex]} speed={55} className="hero-typing" />
           </p>
           <p className="hero-description">
             Partner with passionate AI dreamers who deliver cutting-edge web applications, intelligent automation, and scalable cloud solutions that drive real business results.
