@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaHeart } from 'react-icons/fa';
 import './Footer.css';
 
 interface FooterLink {

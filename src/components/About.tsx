@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaAward, FaUsers, FaProjectDiagram, FaLightbulb, FaBrain } from 'react-icons/fa';
+import { FaAward, FaUsers, FaProjectDiagram,  FaBrain } from 'react-icons/fa';
 import './About.css';
 
 interface Stat {
