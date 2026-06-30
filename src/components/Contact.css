@@ -1,5 +1,5 @@
 .contact-section {
-  background: #0f172a;
+  background: transparent;
 }
 
 .contact-content {
@@ -10,11 +10,11 @@
 }
 
 .contact-info-container {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.02) 100%);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(59, 130, 246, 0.15);
-  border-radius: 24px;
-  padding: 3rem;
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 .contact-info-title {
