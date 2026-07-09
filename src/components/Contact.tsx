@@ -79,7 +79,7 @@ const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="section contact-section">
-      <h2 className="section-title">🚀 Let\'s Build Something Amazing Together</h2>
+      <h2 className="section-title">🚀 Let's Build Something Amazing Together</h2>
       <p className="section-subtitle">
         Ready to turn your vision into reality? Our AI dreamers are standing by to make it happen!
       </p>
