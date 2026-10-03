@@ -7,6 +7,7 @@ import About from './components/About';
 import Skills from './components/Skills';
 import Services from './components/Services';
 import Contact from './components/Contact';
+import Partnership from './components/Partnership';
 import Footer from './components/Footer';
 import BuildPath, { ExperienceMode } from './components/BuildPath';
 import ParticlesBackground from './components/ParticlesBackground';
@@ -70,6 +71,7 @@ const App: React.FC = () => {
             <Route path="/build" element={<BuildPath mode={experienceMode} onModeChange={changeMode} />} />
             <Route path="/technology" element={<Skills mode={experienceMode} onModeChange={changeMode} />} />
             <Route path="/services" element={<Services mode={experienceMode} onModeChange={changeMode} />} />
+            <Route path="/partnership" element={<Partnership />} />
             <Route path="/contact" element={<Contact mode={experienceMode} />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
