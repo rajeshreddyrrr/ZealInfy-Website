@@ -364,6 +364,8 @@ a.contact-info-value:hover {
 }
 
 @media (max-width: 768px) {
+  .contact-content { gap: 2.5rem; }
+
   .contact-intro {
     margin-bottom: 3rem;
   }
@@ -373,7 +375,12 @@ a.contact-info-value:hover {
   }
 
   .contact-form-container {
-    padding: 1.6rem;
+    padding: 1.4rem;
+    border-radius: 24px 8px 24px 8px;
+  }
+
+  .submit-button {
+    width: 100%;
   }
 
   .form-grid {

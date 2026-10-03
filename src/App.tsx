@@ -7,6 +7,9 @@ import About from './components/About';
 import Skills from './components/Skills';
 import Services from './components/Services';
 import Contact from './components/Contact';
+import Partnership from './components/Partnership';
+import CaseStudies from './components/CaseStudies';
+import Products from './components/Products';
 import Footer from './components/Footer';
 import BuildPath, { ExperienceMode } from './components/BuildPath';
 import ParticlesBackground from './components/ParticlesBackground';
@@ -32,6 +35,7 @@ const ScrollToTop: React.FC = () => {
 
 const App: React.FC = () => {
   const [experienceMode, setExperienceMode] = useState<ExperienceMode>('idea');
+  const [exploreOpen, setExploreOpen] = useState(false);
 
   useEffect(() => {
     const handlePointerMove = (event: PointerEvent): void => {
@@ -61,15 +65,18 @@ const App: React.FC = () => {
         </div>
 
         <ParticlesBackground />
-        <Navbar />
+        <Navbar menuOpen={exploreOpen} onMenuOpenChange={setExploreOpen} />
 
         <main className="experience-viewport">
           <Routes>
-            <Route path="/" element={<Hero mode={experienceMode} onModeChange={changeMode} />} />
+            <Route path="/" element={<Hero mode={experienceMode} onModeChange={changeMode} onExplore={() => setExploreOpen(true)} />} />
             <Route path="/about" element={<About />} />
             <Route path="/build" element={<BuildPath mode={experienceMode} onModeChange={changeMode} />} />
             <Route path="/technology" element={<Skills mode={experienceMode} onModeChange={changeMode} />} />
             <Route path="/services" element={<Services mode={experienceMode} onModeChange={changeMode} />} />
+            <Route path="/partnership" element={<Partnership />} />
+            <Route path="/case-studies" element={<CaseStudies />} />
+            <Route path="/products" element={<Products />} />
             <Route path="/contact" element={<Contact mode={experienceMode} />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
