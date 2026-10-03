@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaCode, FaMobile, FaCloud, FaBrain, FaServer, FaRocket } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaArrowRight, FaBrain, FaCloud, FaCode, FaCogs, FaLayerGroup, FaRocket } from 'react-icons/fa';
 import './Services.css';
 
 interface Service {
@@ -7,95 +7,115 @@ interface Service {
   title: string;
   description: string;
   features: string[];
+  phase: string;
 }
 
 const Services: React.FC = () => {
   const services: Service[] = [
     {
       icon: <FaRocket />,
-      title: 'AI-Powered Web Apps',
-      description: 'Launch faster, scale smarter. We build intelligent web applications that adapt and learn, giving you a competitive edge in the digital marketplace.',
-      features: ['Smart Automation', 'Predictive Analytics', 'Real-time Insights', 'Scalable Architecture']
+      title: 'Product Engineering',
+      phase: '01 / Discover & Build',
+      description: 'From an early idea to a production-ready platform, we help design, engineer, and evolve digital products.',
+      features: ['MVP development', 'Full-stack engineering', 'Product modernization']
     },
     {
       icon: <FaBrain />,
-      title: 'Enterprise AI Solutions',
-      description: 'Transform your business operations with custom AI that works. From chatbots to data analysis, we make artificial intelligence work for your bottom line.',
-      features: ['Custom AI Models', 'Business Intelligence', 'Process Automation', 'Data-Driven Decisions']
+      title: 'AI & Automation',
+      phase: '02 / Add Intelligence',
+      description: 'We integrate AI into products and workflows where it can reduce repetitive work, improve decisions, or create better experiences.',
+      features: ['AI integrations', 'Intelligent workflows', 'Agentic automation']
     },
     {
       icon: <FaCloud />,
-      title: 'Cloud Infrastructure',
-      description: 'Scale without limits. Our cloud solutions ensure your applications perform flawlessly whether you have 10 users or 10 million.',
-      features: ['Auto-Scaling', '99.9% Uptime', 'Global Distribution', 'Security First']
-    },
-    {
-      icon: <FaMobile />,
-      title: 'Modern Frontend Experiences',
-      description: 'First impressions matter. We create stunning, responsive interfaces that convert visitors into customers and keep them coming back.',
-      features: ['React/Next.js', 'Mobile-First Design', 'Performance Optimized', 'SEO Ready']
-    },
-    {
-      icon: <FaServer />,
-      title: 'Backend That Never Fails',
-      description: 'Rock-solid foundations for growth. Our backend systems handle millions of requests while keeping your data secure and your business running 24/7.',
-      features: ['Microservices', 'API Development', 'Database Optimization', 'Security Hardened']
+      title: 'Cloud & Modernization',
+      phase: '03 / Scale & Evolve',
+      description: 'We modernize applications and build cloud-ready foundations that can evolve with your business.',
+      features: ['Azure solutions', 'Application modernization', 'Cloud architecture']
     },
     {
       icon: <FaCode />,
-      title: 'MVP to Market Leader',
-      description: 'Start smart, grow fast. We help startups validate ideas with rapid MVPs, then scale them into market-leading platforms.',
-      features: ['Rapid Prototyping', 'User Testing', 'Iterative Development', 'Growth Engineering']
+      title: 'Web & Application Development',
+      phase: '04 / Engineer',
+      description: 'Modern web applications built around usability, maintainability, performance, and business requirements.',
+      features: ['React & Angular', '.NET & Python', 'API development']
+    },
+    {
+      icon: <FaLayerGroup />,
+      title: 'Enterprise Solutions',
+      phase: '05 / Connect',
+      description: 'Engineering support for complex systems where reliability, integration, and long-term maintainability matter.',
+      features: ['Enterprise applications', 'System integrations', 'Data platforms']
+    },
+    {
+      icon: <FaCogs />,
+      title: 'Dedicated Engineering',
+      phase: '06 / Keep Moving',
+      description: 'Extend your engineering capacity with focused development support aligned to your product and delivery process.',
+      features: ['Dedicated developers', 'Feature teams', 'Ongoing support']
     }
   ];
 
+  const [activeService, setActiveService] = useState<number>(0);
+
   const scrollToContact = (): void => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const active = services[activeService];
 
   return (
     <section id="services" className="section services-section">
-      <h2 className="section-title">Solutions That Drive Results</h2>
-      <p className="section-subtitle">
-        From concept to scale - we build digital products that customers love and businesses depend on
-      </p>
+      <div className="services-heading">
+        <div>
+          <span className="services-eyebrow">How we help</span>
+          <h2 className="section-title">From possibility to something real.</h2>
+        </div>
+        <p className="section-subtitle">
+          Don't think of these as separate services. Think of them as connected moves from idea to impact.
+        </p>
+      </div>
 
-      <div className="services-grid">
-        {services.map((service, index) => (
-          <div key={index} className="service-card">
-            <div className="service-icon-wrapper">
-              <div className="service-icon">{service.icon}</div>
-            </div>
-            
-            <h3 className="service-title">{service.title}</h3>
-            <p className="service-description">{service.description}</p>
-            
-            <ul className="service-features">
-              {service.features.map((feature, idx) => (
-                <li key={idx} className="service-feature">
-                  <span className="feature-dot"></span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
+      <div className="services-journey">
+        <div className="journey-rail" aria-hidden="true">
+          <span className="journey-progress" style={{ transform: `scaleX(${(activeService + 1) / services.length})` }} />
+        </div>
 
-            <button className="service-button">
-              🚀 Let's Build This!
+        <div className="service-step-list">
+          {services.map((service, index) => (
+            <button
+              type="button"
+              key={service.title}
+              className={'service-step ' + (activeService === index ? 'service-step-active' : '')}
+              onClick={() => setActiveService(index)}
+            >
+              <span className="service-step-number">{service.phase.split(' / ')[0]}</span>
+              <span className="service-step-title">{service.title}</span>
+              <FaArrowRight className="service-step-arrow" />
             </button>
+          ))}
+        </div>
+
+        <article className="service-focus">
+          <div className="service-focus-icon">{active.icon}</div>
+          <div className="service-focus-copy">
+            <span>{active.phase}</span>
+            <h3>{active.title}</h3>
+            <p>{active.description}</p>
+            <div className="service-focus-features">
+              {active.features.map((feature) => <span key={feature}>{feature}</span>)}
+            </div>
           </div>
-        ))}
+        </article>
       </div>
 
       <div className="services-cta">
-        <h3 className="cta-title">🚀 Ready to Disrupt Your Industry?</h3>
-        <p className="cta-description">
-          Ready to be our first success story? Let's turn your vision into the next big thing in the digital world.
-        </p>
-        <button className="cta-button" onClick={scrollToContact}>
-          💬 Start Your Project Today
+        <div>
+          <span>Have something worth building?</span>
+          <h3>Let's turn the idea into a working product.</h3>
+        </div>
+        <button onClick={scrollToContact}>
+          Start a conversation <FaArrowRight />
         </button>
       </div>
     </section>

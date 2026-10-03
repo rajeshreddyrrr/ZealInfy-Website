@@ -1,100 +1,110 @@
-import React, { useState, useEffect } from 'react';
-import { FaCode, FaRocket, FaBrain } from 'react-icons/fa';
-import TypedText from './TypedText';
+import React from 'react';
+import { FaArrowRight, FaBrain, FaInfinity, FaLightbulb, FaStar } from 'react-icons/fa';
 import './Hero.css';
 
 const Hero: React.FC = () => {
-  const [phraseIndex, setPhraseIndex] = useState<number>(0);
-  const phrases = [
-    'AI-Powered Web Applications',
-    'Intelligent Automation Workflows',
-    'Scalable Cloud Platforms',
-    'Data-Driven Growth Engines'
-  ];
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setPhraseIndex((prev) => (prev + 1) % phrases.length);
-    }, 7000);
-
-    return () => window.clearInterval(interval);
-  }, [phrases.length]);
-
   const scrollToContact = (): void => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToAbout = (): void => {
-    const element = document.getElementById('about');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section id="hero" className="hero">
+      <div className="hero-cosmic-ring hero-cosmic-ring-one" aria-hidden="true" />
+      <div className="hero-cosmic-ring hero-cosmic-ring-two" aria-hidden="true" />
+
       <div className="hero-content">
         <div className="hero-text">
+          <div className="hero-eyebrow">
+            <span className="eyebrow-signal"><FaStar /></span>
+            Technology shaped by curiosity
+          </div>
+
           <h1 className="hero-title">
-            Welcome to <span className="gradient-text">ZealInfy</span>, where passion meets AI.
+            <span className="hero-title-line">Build with</span>
+            <span className="hero-title-line hero-title-gradient">ZEAL.</span>
+            <span className="hero-title-line hero-title-outline">Imagine beyond.</span>
           </h1>
-          <p className="hero-subtitle">
-            Delivering <TypedText key={phraseIndex} text={phrases[phraseIndex]} speed={55} className="hero-typing" />
+
+          <p className="hero-lead">
+            ZealInfy is a technology company driven by a simple idea:
+            <strong> passion should never have a limit.</strong>
+            We turn that energy into software, AI, and digital experiences that
+            open new possibilities for businesses.
           </p>
-          <p className="hero-description">
-            Partner with passionate AI dreamers who deliver cutting-edge web applications, intelligent automation, and scalable cloud solutions that drive real business results.
-          </p>
-          
-          <div className="hero-features">
-            <div className="feature-item">
-              <FaRocket className="feature-icon" />
-              <span>Lightning-Fast Delivery</span>
+
+          <div className="hero-brand-equation">
+            <div className="equation-word">
+              <span>ZEAL</span>
+              <small>Passion to create</small>
             </div>
-            <div className="feature-item">
-              <FaBrain className="feature-icon" />
-              <span>AI-Powered Solutions</span>
+            <span className="equation-symbol">+</span>
+            <div className="equation-word">
+              <span>INFY</span>
+              <small>Infinite possibility</small>
             </div>
-            <div className="feature-item">
-              <FaCode className="feature-icon" />
-              <span>Enterprise-Grade Quality</span>
-            </div>
+            <span className="equation-symbol">=</span>
+            <div className="equation-result">ZEALINFY</div>
           </div>
 
           <div className="hero-buttons">
             <button className="btn-primary" onClick={scrollToContact}>
-              🚀 Start Your Project
+              Start a conversation
+              <FaArrowRight />
             </button>
             <button className="btn-secondary" onClick={scrollToAbout}>
-              See Our Work
+              Explore our thinking
             </button>
+          </div>
+
+          <div className="hero-signal-row">
+            <span><FaBrain /> AI & intelligent systems</span>
+            <span><FaLightbulb /> Product-minded engineering</span>
           </div>
         </div>
 
-        <div className="hero-visual">
-          <div className="floating-card card-1">
-            <div className="card-icon">💻</div>
-            <div className="card-text">Full-Stack Dev</div>
+        <div className="hero-visual" aria-hidden="true">
+          <div className="infinity-universe">
+            <div className="universe-halo universe-halo-one" />
+            <div className="universe-halo universe-halo-two" />
+
+            <div className="infinity-figure">
+              <span className="infinity-stroke infinity-stroke-left" />
+              <span className="infinity-stroke infinity-stroke-right" />
+              <span className="infinity-trace infinity-trace-left" />
+              <span className="infinity-trace infinity-trace-right" />
+            </div>
+
+            <div className="universe-core">
+              <FaInfinity />
+              <span>∞</span>
+              <small>possibility</small>
+            </div>
+
+            <div className="universe-orb orb-ai"><FaBrain /></div>
+            <div className="universe-orb orb-build"><FaLightbulb /></div>
+            <div className="universe-orb orb-infinity"><FaInfinity /></div>
+
+            <span className="universe-star star-one" />
+            <span className="universe-star star-two" />
+            <span className="universe-star star-three" />
+            <span className="universe-star star-four" />
           </div>
-          <div className="floating-card card-2">
-            <div className="card-icon">⚛️</div>
-            <div className="card-text">React Expert</div>
-          </div>
-          <div className="floating-card card-3">
-            <div className="card-icon">🤖</div>
-            <div className="card-text">AI Solutions</div>
-          </div>
-          <div className="floating-card card-4">
-            <div className="card-icon">🐍</div>
-            <div className="card-text">Python Dev</div>
+
+          <div className="visual-caption">
+            <span>Human curiosity</span>
+            <strong>×</strong>
+            <span>Technology without limits</span>
           </div>
         </div>
       </div>
 
       <div className="scroll-indicator">
-        <div className="mouse"></div>
+        <span>Explore the idea</span>
+        <div className="scroll-line" />
       </div>
     </section>
   );

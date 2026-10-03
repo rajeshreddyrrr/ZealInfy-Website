@@ -1,127 +1,110 @@
-import React from 'react';
-import { SiDotnet, SiCsharp, SiReact, SiAngular, SiPython, SiMicrosoftazure, SiTypescript, SiNodedotjs } from 'react-icons/si';
-import { FaBrain, FaDatabase, FaCloud, FaCode } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { SiAngular, SiCsharp, SiDotnet, SiMicrosoftazure, SiPython, SiReact, SiTypescript } from 'react-icons/si';
+import { FaBrain, FaCloud, FaDatabase, FaCode } from 'react-icons/fa';
 import './Skills.css';
-
-interface Skill {
-  name: string;
-  icon: JSX.Element;
-  level: number;
-}
 
 interface SkillCategory {
   title: string;
   icon: JSX.Element;
-  skills: Skill[];
-}
-
-interface TechIcon {
-  icon: JSX.Element;
-  name: string;
+  description: string;
+  technologies: { name: string; icon: JSX.Element }[];
 }
 
 const Skills: React.FC = () => {
-  const skillCategories: SkillCategory[] = [
+  const categories: SkillCategory[] = [
     {
-      title: 'Backend Development',
+      title: 'Product Engineering',
       icon: <FaCode />,
-      skills: [
-        { name: '.NET Core', icon: <SiDotnet />, level: 95 },
-        { name: 'ASP.NET', icon: <SiDotnet />, level: 95 },
-        { name: 'C#', icon: <SiCsharp />, level: 98 },
-        { name: 'Python', icon: <SiPython />, level: 90 }
+      description: 'Modern frontend and backend engineering for reliable digital products.',
+      technologies: [
+        { name: '.NET', icon: <SiDotnet /> },
+        { name: 'C#', icon: <SiCsharp /> },
+        { name: 'React', icon: <SiReact /> },
+        { name: 'Angular', icon: <SiAngular /> },
+        { name: 'TypeScript', icon: <SiTypescript /> }
       ]
     },
     {
-      title: 'Frontend Development',
-      icon: <FaCode />,
-      skills: [
-        { name: 'React', icon: <SiReact />, level: 95 },
-        { name: 'Angular', icon: <SiAngular />, level: 88 },
-        { name: 'TypeScript', icon: <SiTypescript />, level: 92 },
-        { name: 'WebForms', icon: <SiDotnet />, level: 85 }
-      ]
-    },
-    {
-      title: 'AI & Data',
+      title: 'AI & Intelligent Systems',
       icon: <FaBrain />,
-      skills: [
-        { name: 'AI/ML', icon: <FaBrain />, level: 85 },
-        { name: 'LINQ', icon: <FaDatabase />, level: 95 },
-        { name: 'Data Processing', icon: <FaDatabase />, level: 90 },
-        { name: 'Python AI', icon: <SiPython />, level: 88 }
+      description: 'AI capabilities integrated into products, workflows, and business processes.',
+      technologies: [
+        { name: 'Python', icon: <SiPython /> },
+        { name: 'AI / LLMs', icon: <FaBrain /> },
+        { name: 'Automation', icon: <FaCode /> },
+        { name: 'Data Processing', icon: <FaDatabase /> }
       ]
     },
     {
-      title: 'Cloud & Tools',
+      title: 'Cloud & Platforms',
       icon: <FaCloud />,
-      skills: [
-        { name: 'Azure', icon: <SiMicrosoftazure />, level: 88 },
-        { name: 'Cloud Services', icon: <FaCloud />, level: 85 },
-        { name: 'Node.js', icon: <SiNodedotjs />, level: 87 },
-        { name: 'WinForms', icon: <SiDotnet />, level: 92 }
+      description: 'Cloud-ready architecture designed for security, scale, and maintainability.',
+      technologies: [
+        { name: 'Azure', icon: <SiMicrosoftazure /> },
+        { name: 'Cloud Services', icon: <FaCloud /> },
+        { name: 'APIs', icon: <FaCode /> },
+        { name: 'Data Platforms', icon: <FaDatabase /> }
       ]
     }
   ];
 
-  const techIcons: TechIcon[] = [
-    { icon: <SiDotnet />, name: '.NET' },
-    { icon: <SiCsharp />, name: 'C#' },
-    { icon: <SiReact />, name: 'React' },
-    { icon: <SiAngular />, name: 'Angular' },
-    { icon: <SiPython />, name: 'Python' },
-    { icon: <FaBrain />, name: 'AI' },
-    { icon: <SiMicrosoftazure />, name: 'Azure' },
-    { icon: <SiTypescript />, name: 'TypeScript' }
-  ];
+  const [activeCategory, setActiveCategory] = useState<number>(1);
 
   return (
     <section id="skills" className="section skills-section">
-      <h2 className="section-title">Technical Expertise</h2>
-      <p className="section-subtitle">
-        Comprehensive skill set across modern development technologies
-      </p>
-
-      <div className="skills-grid">
-        {skillCategories.map((category, index) => (
-          <div key={index} className="skill-category">
-            <div className="category-header">
-              <div className="category-icon">{category.icon}</div>
-              <h3 className="category-title">{category.title}</h3>
-            </div>
-            
-            <div className="skills-list">
-              {category.skills.map((skill, idx) => (
-                <div key={idx} className="skill-item">
-                  <div className="skill-info">
-                    <div className="skill-name-wrapper">
-                      <span className="skill-icon">{skill.icon}</span>
-                      <span className="skill-name">{skill.name}</span>
-                    </div>
-                    <span className="skill-percentage">{skill.level}%</span>
-                  </div>
-                  <div className="skill-bar">
-                    <div 
-                      className="skill-progress" 
-                      style={{ width: `${skill.level}%` }}
-                    ></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+      <div className="skills-heading">
+        <div>
+          <span className="skills-eyebrow">Engineering foundation</span>
+          <h2 className="section-title">Technology is our playground.</h2>
+        </div>
+        <p className="section-subtitle">
+          Our stack is a means to an outcome: building products that are useful,
+          scalable, maintainable, and ready for what comes next.
+        </p>
       </div>
 
-      <div className="tech-stack-showcase">
-        <h3 className="showcase-title">Technologies We Master</h3>
-        <div className="tech-icons">
-          {techIcons.map((tech, index) => (
-            <div key={index} className="tech-icon-item">
-              {tech.icon}
-              <span>{tech.name}</span>
-            </div>
+      <div className="technology-explorer">
+        <div className="technology-orbit" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
+
+        <div className="skills-grid">
+          {categories.map((category, index) => (
+            <button
+              type="button"
+              key={category.title}
+              className={'skill-category ' + (activeCategory === index ? 'skill-category-active' : '')}
+              onClick={() => setActiveCategory(index)}
+              aria-pressed={activeCategory === index}
+            >
+              <div className="category-header">
+                <div className="category-icon">{category.icon}</div>
+                <div>
+                  <h3 className="category-title">{category.title}</h3>
+                  <p>{category.description}</p>
+                </div>
+              </div>
+
+              <div className="skills-list">
+                {category.technologies.map((technology) => (
+                  <span key={technology.name} className="skill-item">
+                    <span className="skill-icon">{technology.icon}</span>
+                    <span className="skill-name">{technology.name}</span>
+                  </span>
+                ))}
+              </div>
+            </button>
           ))}
+        </div>
+
+        <div className="technology-status">
+          <span className="status-dot" />
+          <span>exploring</span>
+          <strong>{categories[activeCategory].title}</strong>
+          <span className="status-line" />
+          <span>{categories[activeCategory].technologies.length} capability nodes active</span>
         </div>
       </div>
     </section>

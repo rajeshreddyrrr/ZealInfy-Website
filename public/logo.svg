@@ -1,6 +1,11 @@
-<svg width="160" height="50" viewBox="0 0 160 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- ZealInfy as single text -->
-  <text x="0" y="35" font-family="Arial, sans-serif" font-size="32" font-weight="800" fill="#3b82f6">
-    ZealInfy
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" role="img" aria-labelledby="title desc">
+  <title id="title">ZealInfy</title>
+  <desc id="desc">ZealInfy blue wordmark</desc>
+  <text x="160" y="70"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="64"
+        font-weight="600"
+        letter-spacing="-2"
+        fill="#1677D2">ZealInfy</text>
 </svg>
