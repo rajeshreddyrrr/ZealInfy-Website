@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ menuOpen, onMenuOpenChange }) => {
   useEffect(() => {
     if (!menuOpen) return;
     const onKeyDown = (event: KeyboardEvent): void => {
-      if (event.key === 'Escape') closeMenu();
+      if (event.key === 'Escape') onMenuOpenChange(false);
     };
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -40,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({ menuOpen, onMenuOpenChange }) => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [menuOpen]);
+  }, [menuOpen, onMenuOpenChange]);
 
   const activeItem = navItems.find((item) => item.path === location.pathname) ?? navItems[0];
 
