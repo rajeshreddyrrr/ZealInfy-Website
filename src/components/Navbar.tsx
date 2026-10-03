@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { FaArrowRight, FaBars, FaTimes } from 'react-icons/fa';
 import './Navbar.css';
@@ -7,17 +7,18 @@ interface NavItem {
   path: string;
   label: string;
   number: string;
+  description: string;
 }
 
 const navItems: NavItem[] = [
-  { path: '/', label: 'Home', number: '00' },
-  { path: '/about', label: 'About', number: '01' },
-  { path: '/technology', label: 'Technology', number: '02' },
-  { path: '/services', label: 'Services', number: '03' },
-  { path: '/partnership', label: 'Partnership', number: '04' },
-  { path: '/case-studies', label: 'Case Studies', number: '05' },
-  { path: '/products', label: 'Products', number: '06' },
-  { path: '/contact', label: 'Contact', number: '07' },
+  { path: '/', label: 'Home', number: '00', description: 'Where the journey begins.' },
+  { path: '/about', label: 'About', number: '01', description: 'The thinking behind ZealInfy.' },
+  { path: '/technology', label: 'Technology', number: '02', description: 'Our engineering playground.' },
+  { path: '/services', label: 'Services', number: '03', description: 'From possibility to something real.' },
+  { path: '/partnership', label: 'Partnership', number: '04', description: 'Build together. Extend capability.' },
+  { path: '/case-studies', label: 'Case Studies', number: '05', description: 'AI moving from idea to operation.' },
+  { path: '/products', label: 'Products', number: '06', description: 'Ideas we are turning into products.' },
+  { path: '/contact', label: 'Contact', number: '07', description: 'Start with the problem.' },
 ];
 
 const Navbar: React.FC = () => {
@@ -25,6 +26,22 @@ const Navbar: React.FC = () => {
   const location = useLocation();
 
   const closeMenu = (): void => setMenuOpen(false);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') closeMenu();
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [menuOpen]);
+
+  const activeItem = navItems.find((item) => item.path === location.pathname) ?? navItems[0];
 
   return (
     <nav className="navbar">
@@ -36,29 +53,59 @@ const Navbar: React.FC = () => {
           <span className="logo-signal" aria-hidden="true" />
         </NavLink>
 
-        <div className="navbar-menu-shell">
-          <div className={'navbar-menu ' + (menuOpen ? 'active' : '')}>
-            <div className="nav-menu-glow" aria-hidden="true" />
-            {navItems.map((item) => (
+        <div className="navbar-actions">
+          <span className="navbar-current" aria-hidden="true">
+            <span>{activeItem.number}</span>
+            {activeItem.label}
+          </span>
+          <button
+            className={'menu-toggle ' + (menuOpen ? 'menu-toggle-open' : '')}
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="zealinfy-explore-menu"
+            aria-label={menuOpen ? 'Close Explore menu' : 'Open Explore menu'}
+          >
+            <span className="menu-toggle-icon">{menuOpen ? <FaTimes /> : <FaBars />}</span>
+            <span>{menuOpen ? 'Close' : 'Explore'}</span>
+          </button>
+        </div>
+      </div>
+
+      <div className={'explore-overlay ' + (menuOpen ? 'explore-overlay-open' : '')} aria-hidden={!menuOpen}>
+        <button className="explore-backdrop" onClick={closeMenu} tabIndex={-1} aria-label="Close Explore menu" />
+        <div className="explore-panel" id="zealinfy-explore-menu">
+          <div className="explore-panel-grid" aria-hidden="true" />
+          <div className="explore-panel-header">
+            <div>
+              <span className="explore-eyebrow">ZEALINFY / EXPLORE</span>
+              <h2>Choose a direction.</h2>
+            </div>
+            <div className="explore-orbit" aria-hidden="true">∞</div>
+          </div>
+
+          <div className="explore-links">
+            {navItems.filter((item) => item.path !== '/').map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
-                end={item.path === '/'}
-                className={({ isActive }) => 'nav-link ' + (item.path === '/contact' ? 'nav-link-contact ' : '') + (isActive ? 'nav-link-active' : '')}
+                className={({ isActive }) => 'explore-link ' + (isActive ? 'explore-link-active' : '')}
                 onClick={closeMenu}
-                aria-current={location.pathname === item.path ? 'page' : undefined}
               >
-                <span className="nav-number">{item.number}</span>
-                <span className="nav-label">{item.label}</span>
-                {item.path === '/contact' && <FaArrowRight className="nav-arrow" aria-hidden="true" />}
+                <span className="explore-number">{item.number}</span>
+                <span className="explore-link-copy">
+                  <strong>{item.label}</strong>
+                  <small>{item.description}</small>
+                </span>
+                <FaArrowRight className="explore-link-arrow" aria-hidden="true" />
               </NavLink>
             ))}
           </div>
-        </div>
 
-        <button className="menu-toggle" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
-          {menuOpen ? <FaTimes /> : <FaBars />}
-        </button>
+          <div className="explore-footer">
+            <span>Where Passion Meets AI</span>
+            <NavLink to="/contact" onClick={closeMenu}>Start a conversation <FaArrowRight /></NavLink>
+          </div>
+        </div>
       </div>
     </nav>
   );
