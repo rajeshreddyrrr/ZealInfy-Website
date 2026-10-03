@@ -12,18 +12,18 @@ const About: React.FC = () => {
   const principles: Principle[] = [
     {
       number: '01',
-      title: 'Curiosity before convention',
-      description: 'We stay curious about what technology can become, not just what it has already been used for.'
+      title: 'Question the obvious',
+      description: 'We look beyond the first solution because better technology often starts with a better question.'
     },
     {
       number: '02',
-      title: 'Build with purpose',
-      description: 'Technology matters when it solves a real problem. We focus on useful experiences, practical engineering, and outcomes.'
+      title: 'Make complexity useful',
+      description: 'Great engineering turns difficult technology into experiences that feel simple to the people using them.'
     },
     {
       number: '03',
-      title: 'Think beyond the brief',
-      description: 'We look for opportunities to simplify, automate, and create something better than the obvious first solution.'
+      title: 'Keep moving forward',
+      description: 'We learn, experiment, and evolve because the best version of an idea is rarely the first one.'
     }
   ];
 
@@ -32,22 +32,23 @@ const About: React.FC = () => {
       <div className="about-shell">
         <div className="about-heading-row">
           <div>
-            <span className="about-tag">The idea behind ZealInfy</span>
-            <h2 className="section-title">Passion is the starting point.</h2>
+            <span className="about-tag">Why ZealInfy exists</span>
+            <h2 className="section-title">We don't want technology to stand still.</h2>
           </div>
           <p className="about-intro-copy">
-            ZealInfy was born from a simple belief: when people genuinely care about
-            what they build, technology becomes more than code.
+            ZealInfy comes from a belief that technology should create momentum —
+            helping people imagine more, build faster, and solve problems that once
+            felt out of reach.
           </p>
         </div>
 
         <div className="brand-story">
           <div className="brand-story-word">
-            <span className="story-label">ZEAL</span>
-            <h3>Passion to build.</h3>
+            <span className="story-label">01 / ZEAL</span>
+            <h3>Start with something you care about.</h3>
             <p>
-              The drive to learn, experiment, solve difficult problems, and keep
-              improving what we create.
+              Zeal is the energy behind the work — curiosity, persistence, experimentation,
+              and the desire to make something genuinely better.
             </p>
           </div>
 
@@ -56,11 +57,11 @@ const About: React.FC = () => {
           </div>
 
           <div className="brand-story-word">
-            <span className="story-label">INFY</span>
-            <h3>Infinite possibilities.</h3>
+            <span className="story-label">02 / INFY</span>
+            <h3>Never assume there is only one way.</h3>
             <p>
-              The belief that technology gives us more ways to imagine, create,
-              automate, and move businesses forward.
+              Infy represents infinity: more ideas, more possibilities, and more ways
+              for technology to create value.
             </p>
           </div>
         </div>
@@ -69,11 +70,11 @@ const About: React.FC = () => {
           <div className="about-philosophy">
             <div className="philosophy-icon"><FaLightbulb /></div>
             <div>
-              <span className="philosophy-label">Our philosophy</span>
-              <h3>Think boldly. Build thoughtfully. Keep evolving.</h3>
+              <span className="philosophy-label">The ZealInfy mindset</span>
+              <h3>Imagine first. Engineer deeply. Improve continuously.</h3>
               <p>
-                We combine product thinking, software engineering, cloud, and AI to
-                help turn ideas into technology people can actually use.
+                We bring together software engineering, cloud, AI, and product thinking
+                to turn ambitious ideas into technology that can actually move a business forward.
               </p>
             </div>
           </div>
@@ -93,7 +94,7 @@ const About: React.FC = () => {
 
         <div className="about-ai-note">
           <FaBrain />
-          <span>AI is not the destination. It is one of the tools we use to create what comes next.</span>
+          <span>AI is part of the journey — not the entire identity. We use technology where it creates something meaningful.</span>
           <FaArrowRight />
         </div>
       </div>
