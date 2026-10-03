@@ -30,7 +30,10 @@ const Contact:React.FC<ContactProps>=({mode})=>{
   setSubmitting(true);
   setError('');
   try {
-   const configuredBase=process.env.REACT_APP_API_BASE_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : '');
+   const configuredBase=process.env.REACT_APP_API_BASE_URL;
+   if(!configuredBase){
+    throw new Error('Contact API is not configured. Set REACT_APP_API_BASE_URL to the deployed ZealInfy API.');
+   }
    const apiBase=configuredBase.replace(/\/$/,'');
    const response=await fetch(`${apiBase}/api/contact`,{
     method:'POST',
