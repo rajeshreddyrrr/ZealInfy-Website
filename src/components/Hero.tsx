@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaArrowRight, FaBrain, FaInfinity, FaSparkles } from 'react-icons/fa';
+import { FaArrowRight, FaBrain, FaInfinity, FaStar } from 'react-icons/fa';
 import './Hero.css';
 
 const Hero: React.FC = () => {
@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
 
             <div className="visual-node node-one"><FaBrain /></div>
             <div className="visual-node node-two"><FaInfinity /></div>
-            <div className="visual-node node-three"><FaSparkles /></div>
+            <div className="visual-node node-three"><FaStar /></div>
           </div>
 
           <div className="visual-caption">
