@@ -44,21 +44,28 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    const handlePointerMove = (event: PointerEvent): void => {
+      const x = event.clientX / window.innerWidth;
+      const y = event.clientY / window.innerHeight;
+      document.documentElement.style.setProperty('--pointer-x', x.toFixed(3));
+      document.documentElement.style.setProperty('--pointer-y', y.toFixed(3));
+    };
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    return () => window.removeEventListener('pointermove', handlePointerMove);
+  }, []);
+
+  useEffect(() => {
     const revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
         });
       },
       { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
     );
 
     document.querySelectorAll('.section').forEach((section) => revealObserver.observe(section));
-
-    const hero = document.getElementById('hero');
-    if (hero) revealObserver.observe(hero);
 
     return () => revealObserver.disconnect();
   }, []);
@@ -70,9 +77,7 @@ const App: React.FC = () => {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-        if (visible) {
-          setCurrentSection(visible.target.id);
-        }
+        if (visible) setCurrentSection(visible.target.id);
       },
       {
         rootMargin: '-35% 0px -55% 0px',
@@ -95,6 +100,7 @@ const App: React.FC = () => {
         <div className="ambient-orb ambient-orb-two" />
         <div className="ambient-orb ambient-orb-three" />
         <div className="ambient-grid" />
+        <div className="cursor-atmosphere" />
         <div className="scroll-progress-glow" />
       </div>
 
