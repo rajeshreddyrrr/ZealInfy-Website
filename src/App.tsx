@@ -1,54 +1,91 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
-import Products from './components/Products';
-// import Products from './components/Products';
 import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ParticlesBackground from './components/ParticlesBackground';
+
+const sectionIds = ['hero', 'about', 'skills', 'services', 'contact'];
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [currentSection, setCurrentSection] = useState<string>('hero');
 
   useEffect(() => {
+    let frame = 0;
+
     const handleScroll = (): void => {
-      setScrolled(window.scrollY > 50);
+      if (frame) return;
+
+      frame = window.requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = maxScroll > 0 ? scrollY / maxScroll : 0;
+
+        setScrolled(scrollY > 50);
+        document.documentElement.style.setProperty('--scroll-y', `${scrollY}px`);
+        document.documentElement.style.setProperty('--scroll-progress', progress.toFixed(3));
+
+        frame = 0;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
-    const sectionIds = ['hero', 'about', 'products', 'skills', 'services', 'contact'];
-    const observer = new IntersectionObserver(
+    const revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setCurrentSection(entry.target.id);
+            entry.target.classList.add('is-visible');
           }
         });
       },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
+    );
+
+    document.querySelectorAll('.section').forEach((section) => revealObserver.observe(section));
+
+    const hero = document.getElementById('hero');
+    if (hero) revealObserver.observe(hero);
+
+    return () => revealObserver.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible) {
+          setCurrentSection(visible.target.id);
+        }
+      },
       {
-        root: null,
-        rootMargin: '-40% 0px -55% 0px',
-        threshold: 0.25,
+        rootMargin: '-35% 0px -55% 0px',
+        threshold: [0.15, 0.35, 0.6]
       }
     );
 
     sectionIds.forEach((id) => {
       const section = document.getElementById(id);
-      if (section) {
-        observer.observe(section);
-      }
+      if (section) sectionObserver.observe(section);
     });
 
-    return () => observer.disconnect();
+    return () => sectionObserver.disconnect();
   }, []);
 
   return (
@@ -58,13 +95,14 @@ const App: React.FC = () => {
         <div className="ambient-orb ambient-orb-two" />
         <div className="ambient-orb ambient-orb-three" />
         <div className="ambient-grid" />
+        <div className="scroll-progress-glow" />
       </div>
+
       <ParticlesBackground />
-      <Navbar scrolled={scrolled} />
+      <Navbar scrolled={scrolled} currentSection={currentSection} />
       <Hero />
       <About />
       <Skills />
-      {/* <Products /> */}
       <Services />
       <Contact />
       <Footer />
