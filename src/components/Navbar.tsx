@@ -24,7 +24,7 @@ const navItems: NavItem[] = [
 interface NavbarProps { menuOpen: boolean; onMenuOpenChange: (open: boolean) => void; }
 
 const Navbar: React.FC<NavbarProps> = ({ menuOpen, onMenuOpenChange }) => {
-    const location = useLocation();
+  const location = useLocation();
 
   const closeMenu = (): void => onMenuOpenChange(false);
 
@@ -74,12 +74,15 @@ const Navbar: React.FC<NavbarProps> = ({ menuOpen, onMenuOpenChange }) => {
 
       <div className={'explore-overlay ' + (menuOpen ? 'explore-overlay-open' : '')} aria-hidden={!menuOpen}>
         <button className="explore-backdrop" onClick={closeMenu} tabIndex={-1} aria-label="Close Explore menu" />
-        <div className="explore-panel" id="zealinfy-explore-menu">
+        <div className="explore-panel" id="zealinfy-explore-menu" role="dialog" aria-modal="true" aria-labelledby="explore-dialog-title">
           <div className="explore-panel-grid" aria-hidden="true" />
+          <button className="explore-close" type="button" onClick={closeMenu} aria-label="Close Explore menu">
+            <FaTimes aria-hidden="true" />
+          </button>
           <div className="explore-panel-header">
             <div>
               <span className="explore-eyebrow">ZEALINFY / EXPLORE</span>
-              <h2>Choose a direction.</h2>
+              <h2 id="explore-dialog-title">Choose a direction.</h2>
             </div>
             <div className="explore-orbit" aria-hidden="true">∞</div>
           </div>
