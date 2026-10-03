@@ -21,11 +21,12 @@ const navItems: NavItem[] = [
   { path: '/contact', label: 'Contact', number: '07', description: 'Start with the problem.' },
 ];
 
-const Navbar: React.FC = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
+interface NavbarProps { menuOpen: boolean; onMenuOpenChange: (open: boolean) => void; }
 
-  const closeMenu = (): void => setMenuOpen(false);
+const Navbar: React.FC<NavbarProps> = ({ menuOpen, onMenuOpenChange }) => {
+    const location = useLocation();
+
+  const closeMenu = (): void => onMenuOpenChange(false);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -60,7 +61,7 @@ const Navbar: React.FC = () => {
           </span>
           <button
             className={'menu-toggle ' + (menuOpen ? 'menu-toggle-open' : '')}
-            onClick={() => setMenuOpen((open) => !open)}
+            onClick={() => onMenuOpenChange(!menuOpen)}
             aria-expanded={menuOpen}
             aria-controls="zealinfy-explore-menu"
             aria-label={menuOpen ? 'Close Explore menu' : 'Open Explore menu'}
