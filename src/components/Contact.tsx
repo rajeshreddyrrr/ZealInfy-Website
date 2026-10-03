@@ -30,7 +30,8 @@ const Contact:React.FC<ContactProps>=({mode})=>{
   setSubmitting(true);
   setError('');
   try {
-   const apiBase=(process.env.REACT_APP_API_BASE_URL||'').replace(/\/$/,'');
+   const configuredBase=process.env.REACT_APP_API_BASE_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : '');
+   const apiBase=configuredBase.replace(/\/$/,'');
    const response=await fetch(`${apiBase}/api/contact`,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
