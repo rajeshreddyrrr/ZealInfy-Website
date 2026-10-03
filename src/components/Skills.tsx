@@ -53,7 +53,7 @@ const Skills: React.FC = () => {
       <div className="skills-heading">
         <div>
           <span className="skills-eyebrow">Engineering foundation</span>
-          <h2 className="section-title">Technology that brings ideas to life.</h2>
+          <h2 className="section-title">Technology is our playground.</h2>
         </div>
         <p className="section-subtitle">
           Our stack is a means to an outcome: building products that are useful,
