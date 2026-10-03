@@ -57,13 +57,28 @@
 
 .ambient-grid {
   position: absolute;
-  inset: 0;
+  inset: -5%;
   opacity: 0.24;
   background-image:
     linear-gradient(rgba(96, 165, 250, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(96, 165, 250, 0.035) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 80%, transparent 100%);
+  transform: translateY(calc(var(--scroll-y, 0px) * -0.018));
+  transition: transform 0.12s linear;
+}
+
+.scroll-progress-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  transform-origin: left center;
+  transform: scaleX(var(--scroll-progress, 0));
+  background: linear-gradient(90deg, #2563eb, #22d3ee, #a78bfa);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.55);
+  opacity: 0.85;
 }
 
 @keyframes ambient-drift-one {
@@ -85,23 +100,36 @@
   position: relative;
   z-index: 1;
   opacity: 0;
-  transform: translateY(50px);
-  animation: slideInUp 0.8s ease forwards;
+  transform: translateY(46px) scale(0.985);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@keyframes slideInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.section.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
-.section:nth-child(2) { animation-delay: 0.1s; }
-.section:nth-child(3) { animation-delay: 0.2s; }
-.section:nth-child(4) { animation-delay: 0.3s; }
-.section:nth-child(5) { animation-delay: 0.4s; }
-.section:nth-child(6) { animation-delay: 0.5s; }
-.section:nth-child(7) { animation-delay: 0.6s; }
+#hero {
+  opacity: 1;
+  transform: none;
+}
+
+.section::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(760px, 78%);
+  height: 1px;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.28), rgba(34, 211, 238, 0.38), transparent);
+  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.section.is-visible::after {
+  transform: translateX(-50%) scaleX(1);
+}
 
 .section-title {
   font-size: 3rem;
@@ -127,8 +155,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .ambient-orb,
-  .section {
+  .section,
+  .ambient-grid {
     animation: none;
+    transition: none;
+  }
+
+  .scroll-progress-glow {
+    transform: none;
   }
 }
 
