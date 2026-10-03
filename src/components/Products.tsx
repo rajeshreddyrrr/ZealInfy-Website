@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaArrowUpRightFromSquare, FaCode, FaMicrophone, FaRocket, FaShieldAlt, FaUsers } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaCode, FaMicrophone, FaRocket, FaShieldAlt, FaUsers } from 'react-icons/fa';
 import './Products.css';
 
 interface Product {
@@ -71,7 +71,7 @@ const Products: React.FC = () => {
 
             <div className="product-link">
               Exploring the possibility
-              <FaArrowUpRightFromSquare />
+              <FaExternalLinkAlt />
             </div>
           </article>
         ))}
