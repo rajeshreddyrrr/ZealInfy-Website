@@ -4,6 +4,7 @@ import './Navbar.css';
 
 interface NavbarProps {
   scrolled: boolean;
+  currentSection: string;
 }
 
 const navItems = [
@@ -14,7 +15,7 @@ const navItems = [
   { id: 'contact', label: 'Contact', number: '04' }
 ];
 
-const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
+const Navbar: React.FC<NavbarProps> = ({ scrolled, currentSection }) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const toggleMenu = (): void => {
@@ -46,8 +47,13 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                className={'nav-link ' + (item.id === 'contact' ? 'nav-link-contact' : '')}
+                className={
+                  'nav-link ' +
+                  (item.id === 'contact' ? 'nav-link-contact ' : '') +
+                  (currentSection === item.id ? 'nav-link-active' : '')
+                }
                 onClick={() => scrollToSection(item.id)}
+                aria-current={currentSection === item.id ? 'page' : undefined}
               >
                 <span className="nav-number">{item.number}</span>
                 <span className="nav-label">{item.label}</span>
