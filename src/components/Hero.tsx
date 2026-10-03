@@ -1,9 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaArrowRight, FaBrain, FaCloud, FaCogs, FaCode, FaInfinity, FaLightbulb, FaStar } from 'react-icons/fa';
 import { ExperienceMode } from './BuildPath';
 import './Hero.css';
 
-interface HeroProps { mode: ExperienceMode; onModeChange: (mode: ExperienceMode) => void; }
+interface HeroProps { mode: ExperienceMode; onModeChange: (mode: ExperienceMode) => void; onExplore: () => void; }
 
 const nodes: { mode: ExperienceMode; label: string; icon: JSX.Element; x: string; y: string }[] = [
   { mode: 'idea', label: 'IDEA', icon: <FaLightbulb />, x: '50%', y: '8%' },
@@ -22,10 +23,9 @@ const modeCopy: Record<ExperienceMode, { eyebrow: string; title: string; detail:
   impact: { eyebrow: 'Keep moving', title: 'Turn engineering capacity into momentum.', detail: 'Extend your team with focused engineering support while keeping ownership, quality, and direction close.' }
 };
 
-const Hero: React.FC<HeroProps> = ({ mode, onModeChange }) => {
+const Hero: React.FC<HeroProps> = ({ mode, onModeChange, onExplore }) => {
+  const navigate = useNavigate();
   const copy = modeCopy[mode];
-  const scrollTo = (id: string): void => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-
   return (
     <section id="hero" className="hero">
       <div className="hero-cosmic-ring hero-cosmic-ring-one" aria-hidden="true" />
@@ -49,8 +49,8 @@ const Hero: React.FC<HeroProps> = ({ mode, onModeChange }) => {
           </div>
 
           <div className="hero-buttons">
-            <button className="btn-primary" onClick={() => scrollTo('build-path')}>Explore your path <FaArrowRight /></button>
-            <button className="btn-secondary" onClick={() => scrollTo('contact')}>Start a conversation</button>
+            <button className="btn-primary" onClick={onExplore}>Explore your path <FaArrowRight /></button>
+            <button className="btn-secondary" onClick={() => navigate('/contact')}>Start a conversation</button>
           </div>
 
           <div className="hero-signal-row">
@@ -74,7 +74,7 @@ const Hero: React.FC<HeroProps> = ({ mode, onModeChange }) => {
               {nodes.map((node) => <span key={node.mode} style={{ left: node.x, top: node.y }} />)}
             </div>
 
-            <button className="universe-core" type="button" onClick={() => scrollTo('build-path')} aria-label="Explore ZealInfy possibilities">
+            <button className="universe-core" type="button" onClick={onExplore} aria-label="Explore ZealInfy possibilities">
               <FaInfinity />
               <strong>ZEALINFY</strong>
               <small>{mode.toUpperCase()}</small>
