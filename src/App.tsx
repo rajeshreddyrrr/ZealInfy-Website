@@ -35,6 +35,7 @@ const ScrollToTop: React.FC = () => {
 
 const App: React.FC = () => {
   const [experienceMode, setExperienceMode] = useState<ExperienceMode>('idea');
+  const [exploreOpen, setExploreOpen] = useState(false);
 
   useEffect(() => {
     const handlePointerMove = (event: PointerEvent): void => {
@@ -64,11 +65,11 @@ const App: React.FC = () => {
         </div>
 
         <ParticlesBackground />
-        <Navbar />
+        <Navbar menuOpen={exploreOpen} onMenuOpenChange={setExploreOpen} />
 
         <main className="experience-viewport">
           <Routes>
-            <Route path="/" element={<Hero mode={experienceMode} onModeChange={changeMode} />} />
+            <Route path="/" element={<Hero mode={experienceMode} onModeChange={changeMode} onExplore={() => setExploreOpen(true)} />} />
             <Route path="/about" element={<About />} />
             <Route path="/build" element={<BuildPath mode={experienceMode} onModeChange={changeMode} />} />
             <Route path="/technology" element={<Skills mode={experienceMode} onModeChange={changeMode} />} />
