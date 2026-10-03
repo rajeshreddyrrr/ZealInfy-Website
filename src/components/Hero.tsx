@@ -74,7 +74,7 @@ const Hero: React.FC<HeroProps> = ({ mode, onModeChange, onExplore }) => {
               {nodes.map((node) => <span key={node.mode} style={{ left: node.x, top: node.y }} />)}
             </div>
 
-            <button className="universe-core" type="button" onClick={() => scrollTo('build-path')} aria-label="Explore ZealInfy possibilities">
+            <button className="universe-core" type="button" onClick={onExplore} aria-label="Explore ZealInfy possibilities">
               <FaInfinity />
               <strong>ZEALINFY</strong>
               <small>{mode.toUpperCase()}</small>
