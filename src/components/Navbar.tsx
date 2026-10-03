@@ -14,7 +14,8 @@ const navItems: NavItem[] = [
   { path: '/about', label: 'About', number: '01' },
   { path: '/technology', label: 'Technology', number: '02' },
   { path: '/services', label: 'Services', number: '03' },
-  { path: '/contact', label: 'Contact', number: '04' },
+  { path: '/partnership', label: 'Partnership', number: '04' },
+  { path: '/contact', label: 'Contact', number: '05' },
 ];
 
 const Navbar: React.FC = () => {
