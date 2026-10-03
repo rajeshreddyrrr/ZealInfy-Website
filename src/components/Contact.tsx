@@ -68,7 +68,7 @@ const Contact: React.FC = () => {
 
       <div className="contact-content">
         <div className="contact-info-container">
-          <div className="contact-orbit" aria-hidden="true"><FaInfinity /></div>
+          <div className="contact-orbit" aria-hidden="true">∞</div>
           <h3 className="contact-info-title">Let's make the first move.</h3>
           <p className="contact-info-description">
             No giant brief required. A conversation is enough to start exploring what is possible.
