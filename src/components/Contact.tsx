@@ -15,6 +15,9 @@ const modePrompts:Record<ExperienceMode,string>={
  impact:'Engineering capacity you want to extend...'
 };
 
+const EMAIL_GATEWAY_URL='https://zealinfy-ai-gateway-dev-c4cbarh0a3gddued.canadacentral-01.azurewebsites.net';
+const EMAIL_RECIPIENT='connect@zealinfy.com';
+
 const Contact:React.FC<ContactProps>=({mode})=>{
  const [formData,setFormData]=useState<FormData>({name:'',email:'',subject:'',message:''});
  const [submitted,setSubmitted]=useState(false);
@@ -30,20 +33,42 @@ const Contact:React.FC<ContactProps>=({mode})=>{
   setSubmitting(true);
   setError('');
   try {
-   const configuredBase=process.env.REACT_APP_API_BASE_URL;
-   if(!configuredBase){
-    throw new Error('Contact API is not configured. Set REACT_APP_API_BASE_URL to the deployed ZealInfy API.');
+   const gatewayToken=process.env.REACT_APP_EMAIL_GATEWAY_TOKEN;
+   if(!gatewayToken){
+    throw new Error('Email service is not configured.');
    }
-   const apiBase=configuredBase.replace(/\/$/,'');
-   const response=await fetch(`${apiBase}/api/contact`,{
+
+   const response=await fetch(`${EMAIL_GATEWAY_URL}/api/v1/email/send`,{
     method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({...formData,direction:mode})
+    headers:{
+     accept:'*/*',
+     'Idempotency-Key':crypto.randomUUID(),
+     Authorization:`Bearer ${gatewayToken}`,
+     'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+     to:[EMAIL_RECIPIENT],
+     cc:[],
+     bcc:[],
+     subject:formData.subject||'New ZealInfy Website Enquiry',
+     body:`New ZealInfy Website Enquiry
+
+Name: ${formData.name}
+Email: ${formData.email}
+Direction: ${mode}
+Subject: ${formData.subject}
+
+Message:
+${formData.message}`,
+     is_html:false
+    })
    });
+
    if(!response.ok){
     const data=await response.json().catch(()=>null);
     throw new Error(data?.detail||'Unable to send your message. Please try again.');
    }
+
    setSubmitted(true);
    setFormData({name:'',email:'',subject:'',message:''});
   } catch(err) {
