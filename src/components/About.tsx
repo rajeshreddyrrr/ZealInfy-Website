@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaArrowRight, FaBrain, FaInfinity, FaLightbulb } from 'react-icons/fa';
 import './About.css';
 
@@ -9,6 +9,8 @@ interface Principle {
 }
 
 const About: React.FC = () => {
+  const [activePrinciple, setActivePrinciple] = useState<string>('01');
+
   const principles: Principle[] = [
     {
       number: '01',
@@ -54,6 +56,7 @@ const About: React.FC = () => {
 
           <div className="brand-story-symbol" aria-hidden="true">
             <FaInfinity />
+            <span className="brand-story-pulse" />
           </div>
 
           <div className="brand-story-word">
@@ -81,13 +84,19 @@ const About: React.FC = () => {
 
           <div className="principles">
             {principles.map((principle) => (
-              <article key={principle.number} className="principle">
+              <button
+                key={principle.number}
+                type="button"
+                className={'principle ' + (activePrinciple === principle.number ? 'principle-active' : '')}
+                onClick={() => setActivePrinciple(principle.number)}
+              >
                 <span className="principle-number">{principle.number}</span>
                 <div>
                   <h4>{principle.title}</h4>
                   <p>{principle.description}</p>
                 </div>
-              </article>
+                <FaArrowRight className="principle-arrow" />
+              </button>
             ))}
           </div>
         </div>
