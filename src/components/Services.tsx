@@ -58,11 +58,10 @@ const Services: React.FC = () => {
       <div className="services-heading">
         <div>
           <span className="services-eyebrow">How we help</span>
-          <h2 className="section-title">Engineering with a purpose.</h2>
+          <h2 className="section-title">From possibility to something real.</h2>
         </div>
         <p className="section-subtitle">
-          Flexible technology capabilities for startups, growing businesses, and teams
-          looking to build or modernize digital products.
+          We work across the full journey — exploring the problem, shaping the solution, engineering the experience, and helping it evolve.
         </p>
       </div>
 
