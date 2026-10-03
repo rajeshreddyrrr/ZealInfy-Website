@@ -1,12 +1,9 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './Footer.css';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-
-  const scrollToSection = (id: string): void => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <footer className="footer">
@@ -19,9 +16,9 @@ const Footer: React.FC = () => {
       <div className="footer-content">
         <div className="footer-main">
           <div className="footer-brand">
-            <button className="footer-logo" onClick={() => scrollToSection('hero')} aria-label="Back to top">
+            <NavLink className="footer-logo" to="/" aria-label="Go to ZealInfy home">
               <img src="/logo.svg" alt="ZealInfy Logo" className="logo-image" />
-            </button>
+            </NavLink>
             <p className="footer-manifesto">
               <span>ZEAL</span> is the passion to build.
               <br />
@@ -36,10 +33,10 @@ const Footer: React.FC = () => {
             <div className="footer-column">
               <span className="footer-column-index">01</span>
               <h4>Explore</h4>
-              <button onClick={() => scrollToSection('about')}>Our thinking</button>
-              <button onClick={() => scrollToSection('skills')}>Technology</button>
-              <button onClick={() => scrollToSection('services')}>Capabilities</button>
-              <button onClick={() => scrollToSection('contact')}>Start a conversation</button>
+              <NavLink to="/about">Our thinking</NavLink>
+              <NavLink to="/technology">Technology</NavLink>
+              <NavLink to="/services">Capabilities</NavLink>
+              <NavLink to="/contact">Start a conversation</NavLink>
             </div>
 
             <div className="footer-column">
