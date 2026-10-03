@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { FaArrowRight, FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPhone, FaTwitter } from 'react-icons/fa';
 import './Contact.css';
 
 interface FormData {
@@ -23,25 +23,15 @@ interface SocialLink {
 }
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
+  const [formData, setFormData] = useState<FormData>({ name: '', email: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    // Here you would typically send the form data to a backend
     console.log('Form submitted:', formData);
     setSubmitted(true);
     setTimeout(() => {
@@ -51,24 +41,9 @@ const Contact: React.FC = () => {
   };
 
   const contactInfo: ContactInfo[] = [
-    {
-      icon: <FaEnvelope />,
-      title: 'Email',
-      content: 'connect@zealinfy.com',
-      link: 'mailto:connect@zealinfy.com'
-    },
-    {
-      icon: <FaPhone />,
-      title: 'Phone',
-      content: '+91 99663 67270',
-      link: 'tel:+919966367270'
-    },
-    {
-      icon: <FaMapMarkerAlt />,
-      title: 'Office Address',
-      content: 'WeWork, K Raheja Mindspace, Survey No 64, Building Number 9, 13th Floor, Madhapur, Hyderabad, Telangana 500081',
-      link: null
-    }
+    { icon: <FaEnvelope />, title: 'Email', content: 'connect@zealinfy.com', link: 'mailto:connect@zealinfy.com' },
+    { icon: <FaPhone />, title: 'Phone', content: '+91 99663 67270', link: 'tel:+919966367270' },
+    { icon: <FaMapMarkerAlt />, title: 'Hyderabad', content: 'WeWork, K Raheja Mindspace, Madhapur, Hyderabad, Telangana 500081', link: null }
   ];
 
   const socialLinks: SocialLink[] = [
@@ -79,16 +54,24 @@ const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="section contact-section">
-      <h2 className="section-title">🚀 Let's Build Something Amazing Together</h2>
-      <p className="section-subtitle">
-        Ready to turn your vision into reality? Our AI dreamers are standing by to make it happen!
-      </p>
+      <div className="contact-intro">
+        <span className="contact-eyebrow">The next idea could start here</span>
+        <h2 className="contact-title">
+          Have a problem
+          <span> worth exploring?</span>
+        </h2>
+        <p className="contact-subtitle">
+          Tell us what you're trying to build, improve, or rethink. We can start with
+          the problem — the technology can come after.
+        </p>
+      </div>
 
       <div className="contact-content">
         <div className="contact-info-container">
-          <h3 className="contact-info-title">💬 Start Your Project Today</h3>
+          <div className="contact-orbit" aria-hidden="true"><FaInfinity /></div>
+          <h3 className="contact-info-title">Let's make the first move.</h3>
           <p className="contact-info-description">
-            Connect with our team of passionate AI dreamers. From startup MVPs to enterprise solutions - we\'re here to accelerate your success!
+            No giant brief required. A conversation is enough to start exploring what is possible.
           </p>
 
           <div className="contact-info-list">
@@ -97,30 +80,17 @@ const Contact: React.FC = () => {
                 <div className="contact-info-icon">{info.icon}</div>
                 <div className="contact-info-content">
                   <h4 className="contact-info-label">{info.title}</h4>
-                  {info.link ? (
-                    <a href={info.link} className="contact-info-value">
-                      {info.content}
-                    </a>
-                  ) : (
-                    <p className="contact-info-value">{info.content}</p>
-                  )}
+                  {info.link ? <a href={info.link} className="contact-info-value">{info.content}</a> : <p className="contact-info-value">{info.content}</p>}
                 </div>
               </div>
             ))}
           </div>
 
           <div className="social-links">
-            <h4 className="social-title">Follow Us</h4>
+            <h4 className="social-title">Find ZealInfy</h4>
             <div className="social-icons">
               {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  className="social-icon"
-                  aria-label={social.name}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a key={index} href={social.url} className="social-icon" aria-label={social.name} target="_blank" rel="noopener noreferrer">
                   {social.icon}
                 </a>
               ))}
@@ -131,66 +101,43 @@ const Contact: React.FC = () => {
         <div className="contact-form-container">
           {submitted ? (
             <div className="success-message">
-              <div className="success-icon">🏆</div>
-              <h3>Awesome! We Got Your Message!</h3>
-              <p>Our AI dreamers will connect with you within 24 hours. Get ready to build something incredible!</p>
+              <div className="success-icon">✓</div>
+              <h3>Message received.</h3>
+              <p>We'll be in touch to continue the conversation.</p>
             </div>
           ) : (
             <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="name">Your Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Your awesome name"
-                />
+              <div className="form-heading">
+                <span>01</span>
+                <div>
+                  <h3>Start with the idea.</h3>
+                  <p>What are you thinking about?</p>
+                </div>
+              </div>
+
+              <div className="form-grid">
+                <div className="form-group">
+                  <label htmlFor="name">Name</label>
+                  <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="Your name" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Work email</label>
+                  <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required placeholder="you@company.com" />
+                </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Your Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="your.email@company.com"
-                />
+                <label htmlFor="subject">What are we exploring?</label>
+                <input type="text" id="subject" name="subject" value={formData.subject} onChange={handleChange} required placeholder="A product, platform, AI idea, modernization..." />
               </div>
 
               <div className="form-group">
-                <label htmlFor="subject">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  placeholder="Let's discuss your game-changing idea!"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  placeholder="Describe your vision... What incredible solution do you want to build? Our AI dreamers are excited to hear about it! 🚀"
-                ></textarea>
+                <label htmlFor="message">Tell us a little more</label>
+                <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={5} placeholder="Start wherever feels useful. We'll ask the next question." />
               </div>
 
               <button type="submit" className="submit-button">
-                🚀 Launch My Project
+                Send the idea <FaArrowRight />
               </button>
             </form>
           )}
