@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
+import Products from './components/Products';
 // import Products from './components/Products';
 import Services from './components/Services';
 import Contact from './components/Contact';
@@ -24,7 +25,7 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const sectionIds = ['hero', 'about', 'skills', 'services', 'contact'];
+    const sectionIds = ['hero', 'about', 'products', 'skills', 'services', 'contact'];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
