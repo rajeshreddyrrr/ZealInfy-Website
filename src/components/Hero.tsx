@@ -26,8 +26,6 @@ const modeCopy: Record<ExperienceMode, { eyebrow: string; title: string; detail:
 const Hero: React.FC<HeroProps> = ({ mode, onModeChange, onExplore }) => {
   const navigate = useNavigate();
   const copy = modeCopy[mode];
-  const scrollTo = (id: string): void => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-
   return (
     <section id="hero" className="hero">
       <div className="hero-cosmic-ring hero-cosmic-ring-one" aria-hidden="true" />
