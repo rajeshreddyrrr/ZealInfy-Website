@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -18,6 +18,16 @@ const modeShift: Record<ExperienceMode, string> = {
   cloud: '126deg',
   automation: '168deg',
   impact: '210deg',
+};
+
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [pathname]);
+
+  return null;
 };
 
 const App: React.FC = () => {
@@ -40,6 +50,7 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="App" data-experience-mode={experienceMode}>
         <div className="ambient-background" aria-hidden="true">
           <div className="ambient-orb ambient-orb-one" />
