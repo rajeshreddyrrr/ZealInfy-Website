@@ -40,5 +40,6 @@
   },
   "devDependencies": {
     "typescript": "^4.9.5"
-  }
+  },
+  "proxy": "http://localhost:8000"
 }

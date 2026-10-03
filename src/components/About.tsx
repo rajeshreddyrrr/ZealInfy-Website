@@ -1,90 +1,110 @@
-import React from 'react';
-import { FaAward, FaUsers, FaProjectDiagram, FaBrain } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaArrowRight, FaBrain, FaInfinity, FaLightbulb } from 'react-icons/fa';
 import './About.css';
 
-interface Stat {
-  icon: JSX.Element;
+interface Principle {
   number: string;
-  label: string;
-}
-
-interface ValueItem {
   title: string;
   description: string;
 }
 
 const About: React.FC = () => {
-  const stats: Stat[] = [
-    { icon: <FaBrain />, number: '5+', label: 'AI Dreamers' },
-    { icon: <FaProjectDiagram />, number: '15+', label: 'Tech Stack Mastered' },
-    { icon: <FaUsers />, number: '24/7', label: 'Startup Hustle' },
-    { icon: <FaAward />, number: '100%', label: 'Passion Level' }
-  ];
+  const [activePrinciple, setActivePrinciple] = useState<string>('01');
 
-  const values: ValueItem[] = [
+  const principles: Principle[] = [
     {
-      title: 'Bold ideas, clear execution',
-      description: 'We turn ambitious thinking into practical digital experiences that move fast and feel refined.'
+      number: '01',
+      title: 'Question the obvious',
+      description: 'We look beyond the first solution because better technology often starts with a better question.'
     },
     {
-      title: 'Built for momentum',
-      description: 'From first sketch to launch, we keep the process sharp, structured, and deeply collaborative.'
+      number: '02',
+      title: 'Make complexity useful',
+      description: 'Great engineering turns difficult technology into experiences that feel simple to the people using them.'
     },
     {
-      title: 'Crafted with purpose',
-      description: 'Every decision is shaped around real outcomes, lasting impression, and measurable growth.'
+      number: '03',
+      title: 'Keep moving forward',
+      description: 'We learn, experiment, and evolve because the best version of an idea is rarely the first one.'
     }
   ];
 
   return (
     <section id="about" className="section about-section">
       <div className="about-shell">
-        <div className="about-intro">
-          <span className="about-tag">About ZealInfy</span>
-          <h2 className="section-title">Meet the AI Dreamers</h2>
-          <p className="section-subtitle">
-            We are not just developers — we are curious builders creating thoughtful, future-ready digital experiences.
+        <div className="about-heading-row">
+          <div>
+            <span className="about-tag">Why ZealInfy exists</span>
+            <h2 className="section-title">We don't want technology to stand still.</h2>
+          </div>
+          <p className="about-intro-copy">
+            ZealInfy comes from a belief that technology should create momentum —
+            helping people imagine more, build faster, and solve problems that once
+            felt out of reach.
           </p>
         </div>
 
-        <div className="about-content">
-          <div className="about-text">
-            <h3 className="about-heading">Why Choose ZealInfy?</h3>
-            <p className="about-description">
-              At <span className="highlight">ZealInfy</span>, we bring together creativity, strategy, and technology to help founders and teams build with confidence. We believe great products come from clarity, courage, and a deep understanding of what matters most.
+        <div className="brand-story">
+          <div className="brand-story-word">
+            <span className="story-label">01 / ZEAL</span>
+            <h3>Start with something you care about.</h3>
+            <p>
+              Zeal is the energy behind the work — curiosity, persistence, experimentation,
+              and the desire to make something genuinely better.
             </p>
-            <p className="about-description">
-              As a startup ourselves, we understand the pressure to move quickly and think boldly. We act like your technical partners and help turn vision into experiences that feel modern, useful, and memorable.
-            </p>
+          </div>
 
-            <div className="about-values">
-              {values.map((value, index) => (
-                <div key={index} className="value-item">
-                  <div className="value-marker" />
-                  <div className="value-content">
-                    <h4>{value.title}</h4>
-                    <p>{value.description}</p>
-                  </div>
+          <div className="brand-story-symbol" aria-hidden="true">
+            <FaInfinity />
+            <span className="brand-story-pulse" />
+          </div>
+
+          <div className="brand-story-word">
+            <span className="story-label">02 / INFY</span>
+            <h3>Never assume there is only one way.</h3>
+            <p>
+              Infy represents infinity: more ideas, more possibilities, and more ways
+              for technology to create value.
+            </p>
+          </div>
+        </div>
+
+        <div className="about-bottom">
+          <div className="about-philosophy">
+            <div className="philosophy-icon"><FaLightbulb /></div>
+            <div>
+              <span className="philosophy-label">The ZealInfy mindset</span>
+              <h3>Imagine first. Engineer deeply. Improve continuously.</h3>
+              <p>
+                We bring together software engineering, cloud, AI, and product thinking
+                to turn ambitious ideas into technology that can actually move a business forward.
+              </p>
+            </div>
+          </div>
+
+          <div className="principles">
+            {principles.map((principle) => (
+              <button
+                key={principle.number}
+                type="button"
+                className={'principle ' + (activePrinciple === principle.number ? 'principle-active' : '')}
+                onClick={() => setActivePrinciple(principle.number)}
+              >
+                <span className="principle-number">{principle.number}</span>
+                <div>
+                  <h4>{principle.title}</h4>
+                  <p>{principle.description}</p>
                 </div>
-              ))}
-            </div>
+                <FaArrowRight className="principle-arrow" />
+              </button>
+            ))}
           </div>
+        </div>
 
-          <div className="about-panel">
-            <div className="about-panel-inner">
-              <p className="panel-label">What we bring</p>
-              <h3>Thoughtful innovation with a strong product instinct.</h3>
-              <div className="about-stats">
-                {stats.map((stat, index) => (
-                  <div key={index} className="stat-card">
-                    <div className="stat-icon">{stat.icon}</div>
-                    <div className="stat-number">{stat.number}</div>
-                    <div className="stat-label">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+        <div className="about-ai-note">
+          <FaBrain />
+          <span>AI is part of the journey — not the entire identity. We use technology where it creates something meaningful.</span>
+          <FaArrowRight />
         </div>
       </div>
     </section>
