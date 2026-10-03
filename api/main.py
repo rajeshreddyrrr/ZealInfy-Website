@@ -1,6 +1,8 @@
 import os
 import httpx
-from fastapi import FastAPI, HTTPException
+import os
+import httpx
+from fastapi import FastAPI, HTTPException, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 
@@ -13,6 +15,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+class ContactRequest(BaseModel):
+    name: str
+    email: str
+    subject: str
+    message: str
+    direction: str
+
 
 class BuildRequest(BaseModel):
     direction: str
@@ -91,4 +101,37 @@ async def contact(request: ContactRequest):
     except httpx.HTTPError as exc:
         raise HTTPException(status_code=502, detail="Unable to reach the email service.") from exc
 
+    return {"status": "sent", "message": "Your enquiry has been sent successfully."}
+
+
+@app.post("/api/contact")
+async def contact(request: ContactRequest):
+    gateway_url = os.getenv("ZEALINFY_GATEWAY_URL", "").rstrip("/")
+    gateway_key = os.getenv("ZEALINFY_GATEWAY_API_KEY", "")
+    if not gateway_url or not gateway_key:
+        raise HTTPException(status_code=503, detail="Email service is not configured.")
+
+    payload = {
+        "email": request.email,
+        "firstName": request.name,
+        "lastName": "",
+        "jobTitle": "Website Enquiry",
+        "companyName": "",
+        "mobile": "",
+        "website": "",
+        "linkedin": "",
+        "source": "ZealInfy Website",
+        "relevantService": request.direction,
+        "partnershipScore": 0,
+        "subject": request.subject,
+        "body": f"<h2>New ZealInfy Website Enquiry</h2><p><strong>Name:</strong> {request.name}</p><p><strong>Email:</strong> {request.email}</p><p><strong>Direction:</strong> {request.direction}</p><p><strong>Subject:</strong> {request.subject}</p><p><strong>Message:</strong><br>{request.message.replace(chr(10), '<br>')}</p>",
+        "is_html": True,
+    }
+    try:
+        async with httpx.AsyncClient(timeout=20) as client:
+            response = await client.post(f"{gateway_url}/api/freelance/outreach", json=payload, headers={"Content-Type": "application/json", "X-API-Key": gateway_key})
+        if response.is_error:
+            raise HTTPException(status_code=502, detail="Email service could not process the enquiry.")
+    except httpx.HTTPError as exc:
+        raise HTTPException(status_code=502, detail="Unable to reach the email service.") from exc
     return {"status": "sent", "message": "Your enquiry has been sent successfully."}
