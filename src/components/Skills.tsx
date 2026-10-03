@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SiAngular, SiCsharp, SiDotnet, SiMicrosoftazure, SiPython, SiReact, SiTypescript } from 'react-icons/si';
 import { FaBrain, FaCloud, FaDatabase, FaCode } from 'react-icons/fa';
 import './Skills.css';
@@ -48,6 +48,8 @@ const Skills: React.FC = () => {
     }
   ];
 
+  const [activeCategory, setActiveCategory] = useState<number>(1);
+
   return (
     <section id="skills" className="section skills-section">
       <div className="skills-heading">
@@ -61,27 +63,49 @@ const Skills: React.FC = () => {
         </p>
       </div>
 
-      <div className="skills-grid">
-        {categories.map((category) => (
-          <article key={category.title} className="skill-category">
-            <div className="category-header">
-              <div className="category-icon">{category.icon}</div>
-              <div>
-                <h3 className="category-title">{category.title}</h3>
-                <p>{category.description}</p>
-              </div>
-            </div>
+      <div className="technology-explorer">
+        <div className="technology-orbit" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
 
-            <div className="skills-list">
-              {category.technologies.map((technology) => (
-                <div key={technology.name} className="skill-item">
-                  <span className="skill-icon">{technology.icon}</span>
-                  <span className="skill-name">{technology.name}</span>
+        <div className="skills-grid">
+          {categories.map((category, index) => (
+            <button
+              type="button"
+              key={category.title}
+              className={'skill-category ' + (activeCategory === index ? 'skill-category-active' : '')}
+              onClick={() => setActiveCategory(index)}
+              aria-pressed={activeCategory === index}
+            >
+              <div className="category-header">
+                <div className="category-icon">{category.icon}</div>
+                <div>
+                  <h3 className="category-title">{category.title}</h3>
+                  <p>{category.description}</p>
                 </div>
-              ))}
-            </div>
-          </article>
-        ))}
+              </div>
+
+              <div className="skills-list">
+                {category.technologies.map((technology) => (
+                  <span key={technology.name} className="skill-item">
+                    <span className="skill-icon">{technology.icon}</span>
+                    <span className="skill-name">{technology.name}</span>
+                  </span>
+                ))}
+              </div>
+            </button>
+          ))}
+        </div>
+
+        <div className="technology-status">
+          <span className="status-dot" />
+          <span>exploring</span>
+          <strong>{categories[activeCategory].title}</strong>
+          <span className="status-line" />
+          <span>{categories[activeCategory].technologies.length} capability nodes active</span>
+        </div>
       </div>
     </section>
   );
