@@ -20,7 +20,7 @@ const CaseStudies:React.FC=()=>{
  return <section className="case-studies-page">
   <div className="case-hero">
    <div className="case-hero-grid" aria-hidden="true"/>
-   <div className="case-hero-copy"><span className="case-eyebrow">06 / Case Studies</span><h1>AI that moves from <span>idea to operation.</span></h1><p>Explore how ZealInfy approaches AI agents and intelligent workflows — from healthcare review to AI workforce and customer support patterns.</p></div>
+   <div className="case-hero-copy"><span className="case-eyebrow">05 / Case Studies</span><h1>AI that moves from <span>idea to operation.</span></h1><p>Explore how ZealInfy approaches AI agents and intelligent workflows — from healthcare review to AI workforce and customer support patterns.</p></div>
    <div className="case-hero-mark" aria-hidden="true"><span>AI</span><strong>∞</strong><span>IN ACTION</span></div>
   </div>
   <div className="case-content">
