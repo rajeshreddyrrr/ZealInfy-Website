@@ -1,4 +1,5 @@
 import os
+import uuid
 import httpx
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -57,56 +58,62 @@ def build_recommendation(request: BuildRequest):
 
 @app.post("/api/contact")
 async def contact(request: ContactRequest):
-    gateway_url = os.getenv("ZEALINFY_GATEWAY_URL", "").rstrip("/")
-    gateway_key = os.getenv("ZEALINFY_GATEWAY_API_KEY", "")
-    if not gateway_url or not gateway_key:
-        raise HTTPException(status_code=503, detail="Email service is not configured.")
+    """Forward a website enquiry to the ZealInfy email gateway."""
+    gateway_url = os.getenv(
+        "ZEALINFY_EMAIL_GATEWAY_URL",
+        "https://zealinfy-ai-gateway-dev-c4cbarh0a3gddued.canadacentral-01.azurewebsites.net",
+    ).rstrip("/")
+    gateway_token = os.getenv("ZEALINFY_EMAIL_GATEWAY_TOKEN", "")
+    notification_recipient = os.getenv("ZEALINFY_CONTACT_RECIPIENT", "connect@zealinfy.com")
+
+    if not gateway_token:
+        raise HTTPException(
+            status_code=503,
+            detail="Email service is not configured on the API server.",
+        )
+
+    body = (
+        "<h2>New ZealInfy Website Enquiry</h2>"
+        f"<p><strong>Name:</strong> {request.name}</p>"
+        f"<p><strong>Email:</strong> {request.email}</p>"
+        f"<p><strong>Direction:</strong> {request.direction}</p>"
+        f"<p><strong>Subject:</strong> {request.subject}</p>"
+        f"<p><strong>Message:</strong><br>{request.message.replace(chr(10), '<br>')}</p>"
+    )
 
     payload = {
-        "email": request.email,
-        "firstName": request.name,
-        "lastName": "",
-        "jobTitle": "Website Enquiry",
-        "companyName": "",
-        "mobile": "",
-        "website": "",
-        "linkedin": "",
-        "source": "ZealInfy Website",
-        "relevantService": request.direction,
-        "partnershipScore": 0,
-        "subject": request.subject,
-        "body": (
-            f"<h2>New ZealInfy Website Enquiry</h2>"
-            f"<p><strong>Name:</strong> {request.name}</p>"
-            f"<p><strong>Email:</strong> {request.email}</p>"
-            f"<p><strong>Direction:</strong> {request.direction}</p>"
-            f"<p><strong>Subject:</strong> {request.subject}</p>"
-            f"<p><strong>Message:</strong><br>{request.message.replace(chr(10), '<br>')}</p>"
-        ),
+        "to": [notification_recipient],
+        "cc": [],
+        "bcc": [],
+        "subject": request.subject or "New ZealInfy Website Enquiry",
+        "body": body,
         "is_html": True,
     }
 
     headers = {
+        "accept": "*/*",
+        "Idempotency-Key": str(uuid.uuid4()),
+        "Authorization": f"Bearer {gateway_token}",
         "Content-Type": "application/json",
-        "X-API-Key": gateway_key,
     }
 
     try:
         async with httpx.AsyncClient(timeout=20) as client:
             response = await client.post(
-                f"{gateway_url}/api/freelance/outreach",
+                f"{gateway_url}/api/v1/email/send",
                 json=payload,
                 headers=headers,
-            )
-        if response.is_error:
-            raise HTTPException(
-                status_code=502,
-                detail="Email service could not process the enquiry.",
             )
     except httpx.HTTPError as exc:
         raise HTTPException(
             status_code=502,
-            detail="Unable to reach the email service.",
+            detail="Unable to reach the ZealInfy email gateway.",
         ) from exc
+
+    if response.is_error:
+        raise HTTPException(
+            status_code=502,
+            detail=f"Email gateway rejected the enquiry (HTTP {response.status_code}).",
+        )
 
     return {"status": "sent", "message": "Your enquiry has been sent successfully."}
