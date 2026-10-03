@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaArrowRight, FaBrain, FaInfinity, FaLightbulb, FaSparkles } from 'react-icons/fa';
+import { FaArrowRight, FaBrain, FaInfinity, FaLightbulb, FaStar } from 'react-icons/fa';
 import './Hero.css';
 
 const Hero: React.FC = () => {
@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
       <div className="hero-content">
         <div className="hero-text">
           <div className="hero-eyebrow">
-            <span className="eyebrow-signal"><FaSparkles /></span>
+            <span className="eyebrow-signal"><FaStar /></span>
             Technology shaped by curiosity
           </div>
 
