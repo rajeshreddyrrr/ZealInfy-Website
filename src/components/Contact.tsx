@@ -6,7 +6,7 @@ import './Contact.css';
 interface FormData { name:string; email:string; subject:string; message:string; }
 interface ContactProps { mode:ExperienceMode; }
 
-const modePrompts:Record<ExperienceMode,string>={
+const CONTACT_API_URL=process.env.REACT_APP_CONTACT_API_URL||'https://zealinfy-ai-gateway-dev-c4cbarh0a3gddued.canadacentral-01.azurewebsites.net/api/v1/public/contact';\n\nconst modePrompts:Record<ExperienceMode,string>={
  idea:'A product, platform, or idea...',
  engineering:'A system you want to modernize...',
  intelligence:'An AI or automation opportunity...',
@@ -30,7 +30,7 @@ const Contact:React.FC<ContactProps>=({mode})=>{
   setSubmitting(true);
   setError('');
   try {
-   const response=await fetch('https://zealinfy-ai-gateway-dev-c4cbarh0a3gddued.canadacentral-01.azurewebsites.net/api/v1/public/contact',{
+   const response=await fetch(CONTACT_API_URL,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({...formData,direction:mode})
