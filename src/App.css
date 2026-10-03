@@ -3,15 +3,84 @@
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
-  transition: all 0.3s ease;
+  isolation: isolate;
   background:
-    radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), transparent 28%),
-    linear-gradient(135deg, #07111f 0%, #0f172a 45%, #111c33 100%);
+    radial-gradient(circle at 15% 5%, rgba(37, 99, 235, 0.12), transparent 28%),
+    radial-gradient(circle at 86% 32%, rgba(14, 165, 233, 0.08), transparent 25%),
+    linear-gradient(145deg, #030914 0%, #07111f 38%, #0a1426 68%, #050b16 100%);
+}
+
+.ambient-background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(30, 64, 175, 0.05), transparent 45%);
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.45;
+  will-change: transform;
+}
+
+.ambient-orb-one {
+  width: 42vw;
+  height: 42vw;
+  top: -18vw;
+  left: -10vw;
+  background: rgba(37, 99, 235, 0.18);
+  animation: ambient-drift-one 18s ease-in-out infinite alternate;
+}
+
+.ambient-orb-two {
+  width: 34vw;
+  height: 34vw;
+  top: 34%;
+  right: -12vw;
+  background: rgba(14, 165, 233, 0.12);
+  animation: ambient-drift-two 22s ease-in-out infinite alternate;
+}
+
+.ambient-orb-three {
+  width: 28vw;
+  height: 28vw;
+  bottom: -12vw;
+  left: 32%;
+  background: rgba(79, 70, 229, 0.1);
+  animation: ambient-drift-three 20s ease-in-out infinite alternate;
+}
+
+.ambient-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.24;
+  background-image:
+    linear-gradient(rgba(96, 165, 250, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 80%, transparent 100%);
+}
+
+@keyframes ambient-drift-one {
+  to { transform: translate3d(10vw, 8vh, 0) scale(1.12); }
+}
+
+@keyframes ambient-drift-two {
+  to { transform: translate3d(-7vw, -5vh, 0) scale(1.08); }
+}
+
+@keyframes ambient-drift-three {
+  to { transform: translate3d(5vw, -4vh, 0) scale(1.15); }
 }
 
 .section {
-  padding: 100px 20px;
-  max-width: 1200px;
+  padding: 120px 20px;
+  max-width: 1280px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -27,7 +96,6 @@
   }
 }
 
-/* Stagger animation for sections */
 .section:nth-child(2) { animation-delay: 0.1s; }
 .section:nth-child(3) { animation-delay: 0.2s; }
 .section:nth-child(4) { animation-delay: 0.3s; }
@@ -39,44 +107,45 @@
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  background: linear-gradient(110deg, #e0f2fe 0%, #60a5fa 42%, #a5b4fc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: -0.035em;
   position: relative;
-  animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-  from {
-    text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-  }
-  to {
-    text-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
-  }
 }
 
 .section-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   color: #94a3b8;
   margin-bottom: 4rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-orb,
+  .section {
+    animation: none;
+  }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 60px 20px;
+    padding: 85px 20px;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
 
   .section-subtitle {
     font-size: 1rem;
+  }
+
+  .ambient-grid {
+    background-size: 48px 48px;
   }
 }
