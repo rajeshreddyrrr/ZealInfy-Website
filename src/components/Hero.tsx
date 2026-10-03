@@ -1,99 +1,109 @@
 import React from 'react';
-import { FaArrowRight, FaBrain, FaInfinity, FaStar } from 'react-icons/fa';
+import { FaArrowRight, FaBrain, FaInfinity, FaLightbulb, FaSparkles } from 'react-icons/fa';
 import './Hero.css';
 
 const Hero: React.FC = () => {
   const scrollToContact = (): void => {
-    const element = document.getElementById('contact');
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToAbout = (): void => {
-    const element = document.getElementById('about');
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section id="hero" className="hero">
-      <div className="hero-orbit hero-orbit-one" />
-      <div className="hero-orbit hero-orbit-two" />
+      <div className="hero-cosmic-ring hero-cosmic-ring-one" aria-hidden="true" />
+      <div className="hero-cosmic-ring hero-cosmic-ring-two" aria-hidden="true" />
 
       <div className="hero-content">
         <div className="hero-text">
           <div className="hero-eyebrow">
-            <span className="eyebrow-dot" />
-            Passion. Technology. Infinite Possibilities.
+            <span className="eyebrow-signal"><FaSparkles /></span>
+            Technology shaped by curiosity
           </div>
 
           <h1 className="hero-title">
-            Where <span className="hero-title-accent">passion</span>
-            <br />
-            meets <span className="hero-title-accent">AI.</span>
+            <span className="hero-title-line">Build with</span>
+            <span className="hero-title-line hero-title-gradient">ZEAL.</span>
+            <span className="hero-title-line hero-title-outline">Imagine beyond.</span>
           </h1>
 
           <p className="hero-lead">
-            ZealInfy is built by people who are genuinely passionate about technology —
-            creating intelligent products, modern digital experiences, and AI-powered
-            solutions that turn ambitious ideas into reality.
+            ZealInfy is a technology company driven by a simple idea:
+            <strong> passion should never have a limit.</strong>
+            We turn that energy into software, AI, and digital experiences that
+            open new possibilities for businesses.
           </p>
 
-          <div className="hero-brand-meaning">
-            <div className="meaning-item">
-              <span className="meaning-word">ZEAL</span>
-              <span className="meaning-description">The passion to build.</span>
+          <div className="hero-brand-equation">
+            <div className="equation-word">
+              <span>ZEAL</span>
+              <small>Passion to create</small>
             </div>
-            <div className="meaning-divider" />
-            <div className="meaning-item">
-              <span className="meaning-word">INFY</span>
-              <span className="meaning-description">Infinite possibilities.</span>
+            <span className="equation-symbol">+</span>
+            <div className="equation-word">
+              <span>INFY</span>
+              <small>Infinite possibility</small>
             </div>
+            <span className="equation-symbol">=</span>
+            <div className="equation-result">ZEALINFY</div>
           </div>
 
           <div className="hero-buttons">
             <button className="btn-primary" onClick={scrollToContact}>
-              Let's Build Together
+              Start a conversation
               <FaArrowRight />
             </button>
             <button className="btn-secondary" onClick={scrollToAbout}>
-              Discover ZealInfy
+              Explore our thinking
             </button>
           </div>
 
-          <div className="hero-trust-line">
-            <span><FaBrain /> AI-first thinking</span>
-            <span><FaInfinity /> Built for what’s next</span>
+          <div className="hero-signal-row">
+            <span><FaBrain /> AI & intelligent systems</span>
+            <span><FaLightbulb /> Product-minded engineering</span>
           </div>
         </div>
 
         <div className="hero-visual" aria-hidden="true">
-          <div className="infinity-stage">
-            <div className="infinity-glow" />
-            <div className="infinity-symbol">
-              <span className="infinity-loop infinity-loop-left" />
-              <span className="infinity-loop infinity-loop-right" />
+          <div className="infinity-universe">
+            <div className="universe-halo universe-halo-one" />
+            <div className="universe-halo universe-halo-two" />
+
+            <div className="infinity-figure">
+              <span className="infinity-stroke infinity-stroke-left" />
+              <span className="infinity-stroke infinity-stroke-right" />
+              <span className="infinity-trace infinity-trace-left" />
+              <span className="infinity-trace infinity-trace-right" />
             </div>
 
-            <div className="visual-core">
-              <span className="core-label">ZEAL</span>
-              <span className="core-divider" />
-              <span className="core-label">INFY</span>
+            <div className="universe-core">
+              <FaInfinity />
+              <span>∞</span>
+              <small>possibility</small>
             </div>
 
-            <div className="visual-node node-one"><FaBrain /></div>
-            <div className="visual-node node-two"><FaInfinity /></div>
-            <div className="visual-node node-three"><FaStar /></div>
+            <div className="universe-orb orb-ai"><FaBrain /></div>
+            <div className="universe-orb orb-build"><FaLightbulb /></div>
+            <div className="universe-orb orb-infinity"><FaInfinity /></div>
+
+            <span className="universe-star star-one" />
+            <span className="universe-star star-two" />
+            <span className="universe-star star-three" />
+            <span className="universe-star star-four" />
           </div>
 
           <div className="visual-caption">
-            <span>Human passion</span>
+            <span>Human curiosity</span>
             <strong>×</strong>
-            <span>Infinite technology</span>
+            <span>Technology without limits</span>
           </div>
         </div>
       </div>
 
       <div className="scroll-indicator">
-        <span>Scroll to explore</span>
+        <span>Explore the idea</span>
         <div className="scroll-line" />
       </div>
     </section>
