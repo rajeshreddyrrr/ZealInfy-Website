@@ -1,15 +1,30 @@
 import React from 'react';
-import { FaArrowRight, FaBrain, FaInfinity, FaLightbulb, FaStar } from 'react-icons/fa';
+import { FaArrowRight, FaBrain, FaCloud, FaCogs, FaCode, FaInfinity, FaLightbulb, FaStar } from 'react-icons/fa';
+import { ExperienceMode } from './BuildPath';
 import './Hero.css';
 
-const Hero: React.FC = () => {
-  const scrollToContact = (): void => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
+interface HeroProps { mode: ExperienceMode; onModeChange: (mode: ExperienceMode) => void; }
 
-  const scrollToAbout = (): void => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  };
+const nodes: { mode: ExperienceMode; label: string; icon: JSX.Element; x: string; y: string }[] = [
+  { mode: 'idea', label: 'IDEA', icon: <FaLightbulb />, x: '50%', y: '8%' },
+  { mode: 'engineering', label: 'ENGINEERING', icon: <FaCode />, x: '88%', y: '34%' },
+  { mode: 'intelligence', label: 'AI', icon: <FaBrain />, x: '72%', y: '84%' },
+  { mode: 'cloud', label: 'CLOUD', icon: <FaCloud />, x: '27%', y: '84%' },
+  { mode: 'automation', label: 'AUTOMATION', icon: <FaCogs />, x: '12%', y: '35%' }
+];
+
+const modeCopy: Record<ExperienceMode, { eyebrow: string; title: string; detail: string }> = {
+  idea: { eyebrow: 'Start with curiosity', title: 'Build with ZEAL. Imagine beyond.', detail: 'Bring an idea. We turn the unknown into something you can use, test, learn from, and grow.' },
+  engineering: { eyebrow: 'Engineering without friction', title: 'Make complex things feel simple.', detail: 'Product engineering, modern architecture, and clean systems built around the way your business actually works.' },
+  intelligence: { eyebrow: 'Intelligence, applied', title: 'Add intelligence where it matters.', detail: 'AI, LLMs, agents, and automation become useful when they solve a real problem inside the product or workflow.' },
+  cloud: { eyebrow: 'Built for what comes next', title: 'Give your systems room to grow.', detail: 'Cloud architecture and modernization that create stronger foundations without losing sight of the product.' },
+  automation: { eyebrow: 'Remove the repetitive', title: 'Let technology carry the routine.', detail: 'Connect the pieces, automate the handoffs, and give people more time for work that needs judgment.' },
+  impact: { eyebrow: 'Keep moving', title: 'Turn engineering capacity into momentum.', detail: 'Extend your team with focused engineering support while keeping ownership, quality, and direction close.' }
+};
+
+const Hero: React.FC<HeroProps> = ({ mode, onModeChange }) => {
+  const copy = modeCopy[mode];
+  const scrollTo = (id: string): void => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <section id="hero" className="hero">
@@ -18,59 +33,36 @@ const Hero: React.FC = () => {
 
       <div className="hero-content">
         <div className="hero-text">
-          <div className="hero-eyebrow">
-            <span className="eyebrow-signal"><FaStar /></span>
-            Technology shaped by curiosity
-          </div>
-
+          <div className="hero-eyebrow"><span className="eyebrow-signal"><FaStar /></span>{copy.eyebrow}</div>
           <h1 className="hero-title">
-            <span className="hero-title-line">Build with</span>
-            <span className="hero-title-line hero-title-gradient">ZEAL.</span>
-            <span className="hero-title-line hero-title-outline">Imagine beyond.</span>
+            <span className="hero-title-line">{copy.title.split('. ')[0]}{copy.title.includes('. ') ? '.' : ''}</span>
+            {copy.title.includes('. ') && <span className="hero-title-line hero-title-gradient">{copy.title.split('. ')[1]}</span>}
           </h1>
-
-          <p className="hero-lead">
-            ZealInfy is a technology company driven by a simple idea:
-            <strong> passion should never have a limit.</strong>
-            We turn that energy into software, AI, and digital experiences that
-            open new possibilities for businesses.
-          </p>
+          <p className="hero-lead">{copy.detail}</p>
 
           <div className="hero-brand-equation">
-            <div className="equation-word">
-              <span>ZEAL</span>
-              <small>Passion to create</small>
-            </div>
+            <div className="equation-word"><span>ZEAL</span><small>Passion to create</small></div>
             <span className="equation-symbol">+</span>
-            <div className="equation-word">
-              <span>INFY</span>
-              <small>Infinite possibility</small>
-            </div>
+            <div className="equation-word"><span>INFY</span><small>Infinite possibility</small></div>
             <span className="equation-symbol">=</span>
             <div className="equation-result">ZEALINFY</div>
           </div>
 
           <div className="hero-buttons">
-            <button className="btn-primary" onClick={scrollToContact}>
-              Start a conversation
-              <FaArrowRight />
-            </button>
-            <button className="btn-secondary" onClick={scrollToAbout}>
-              Explore our thinking
-            </button>
+            <button className="btn-primary" onClick={() => scrollTo('build-path')}>Explore your path <FaArrowRight /></button>
+            <button className="btn-secondary" onClick={() => scrollTo('contact')}>Start a conversation</button>
           </div>
 
           <div className="hero-signal-row">
             <span><FaBrain /> AI & intelligent systems</span>
-            <span><FaLightbulb /> Product-minded engineering</span>
+            <span><FaCode /> Product-minded engineering</span>
           </div>
         </div>
 
-        <div className="hero-visual" aria-hidden="true">
-          <div className="infinity-universe">
+        <div className="hero-visual">
+          <div className={'infinity-universe mode-' + mode}>
             <div className="universe-halo universe-halo-one" />
             <div className="universe-halo universe-halo-two" />
-
             <div className="infinity-figure">
               <span className="infinity-stroke infinity-stroke-left" />
               <span className="infinity-stroke infinity-stroke-right" />
@@ -78,34 +70,39 @@ const Hero: React.FC = () => {
               <span className="infinity-trace infinity-trace-right" />
             </div>
 
-            <div className="universe-core">
-              <FaInfinity />
-              <span>∞</span>
-              <small>possibility</small>
+            <div className="experience-lines" aria-hidden="true">
+              {nodes.map((node) => <span key={node.mode} style={{ left: node.x, top: node.y }} />)}
             </div>
 
-            <div className="universe-orb orb-ai"><FaBrain /></div>
-            <div className="universe-orb orb-build"><FaLightbulb /></div>
-            <div className="universe-orb orb-infinity"><FaInfinity /></div>
+            <button className="universe-core" type="button" onClick={() => scrollTo('build-path')} aria-label="Explore ZealInfy possibilities">
+              <FaInfinity />
+              <strong>ZEALINFY</strong>
+              <small>{mode.toUpperCase()}</small>
+            </button>
 
-            <span className="universe-star star-one" />
-            <span className="universe-star star-two" />
-            <span className="universe-star star-three" />
-            <span className="universe-star star-four" />
+            {nodes.map((node) => (
+              <button
+                key={node.mode}
+                type="button"
+                className={'universe-node node-' + node.mode + (mode === node.mode ? ' universe-node-active' : '')}
+                style={{ left: node.x, top: node.y }}
+                onClick={() => onModeChange(node.mode)}
+                aria-label={'Explore ' + node.label}
+                aria-pressed={mode === node.mode}
+              >
+                <span>{node.icon}</span><small>{node.label}</small>
+              </button>
+            ))}
+
+            <span className="universe-star star-one" /><span className="universe-star star-two" />
+            <span className="universe-star star-three" /><span className="universe-star star-four" />
           </div>
 
-          <div className="visual-caption">
-            <span>Human curiosity</span>
-            <strong>×</strong>
-            <span>Technology without limits</span>
-          </div>
+          <div className="visual-caption"><span>Choose a node</span><strong>→</strong><span>shape the experience</span></div>
         </div>
       </div>
 
-      <div className="scroll-indicator">
-        <span>Explore the idea</span>
-        <div className="scroll-line" />
-      </div>
+      <div className="scroll-indicator"><span>Scroll or interact</span><div className="scroll-line" /></div>
     </section>
   );
 };
