@@ -1,5 +1,6 @@
 import os
 import uuid
+import html
 import httpx
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -72,13 +73,20 @@ async def contact(request: ContactRequest):
             detail="Email service is not configured on the API server.",
         )
 
+    # Escape form input before embedding it in the HTML email body.
+    name = html.escape(request.name)
+    email = html.escape(str(request.email))
+    direction = html.escape(request.direction)
+    subject = html.escape(request.subject)
+    message = html.escape(request.message).replace("\n", "<br>")
+
     body = (
         "<h2>New ZealInfy Website Enquiry</h2>"
-        f"<p><strong>Name:</strong> {request.name}</p>"
-        f"<p><strong>Email:</strong> {request.email}</p>"
-        f"<p><strong>Direction:</strong> {request.direction}</p>"
-        f"<p><strong>Subject:</strong> {request.subject}</p>"
-        f"<p><strong>Message:</strong><br>{request.message.replace(chr(10), '<br>')}</p>"
+        f"<p><strong>Name:</strong> {name}</p>"
+        f"<p><strong>Email:</strong> {email}</p>"
+        f"<p><strong>Direction:</strong> {direction}</p>"
+        f"<p><strong>Subject:</strong> {subject}</p>"
+        f"<p><strong>Message:</strong><br>{message}</p>"
     )
 
     payload = {
