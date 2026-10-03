@@ -64,8 +64,21 @@
     linear-gradient(90deg, rgba(96, 165, 250, 0.035) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 80%, transparent 100%);
-  transform: translateY(calc(var(--scroll-y, 0px) * -0.018));
-  transition: transform 0.12s linear;
+  transform: translate3d(calc((var(--pointer-x, 0.5) - 0.5) * -18px), calc(var(--scroll-y, 0px) * -0.018), 0);
+  transition: transform 0.16s linear;
+}
+
+.cursor-atmosphere {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  left: calc(var(--pointer-x, 0.5) * 100%);
+  top: calc(var(--pointer-y, 0.5) * 100%);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.075), rgba(37, 99, 235, 0.025) 35%, transparent 70%);
+  filter: blur(10px);
+  transition: left 0.18s ease-out, top 0.18s ease-out;
 }
 
 .scroll-progress-glow {
@@ -156,7 +169,8 @@
 @media (prefers-reduced-motion: reduce) {
   .ambient-orb,
   .section,
-  .ambient-grid {
+  .ambient-grid,
+  .cursor-atmosphere {
     animation: none;
     transition: none;
   }
@@ -181,5 +195,9 @@
 
   .ambient-grid {
     background-size: 48px 48px;
+  }
+
+  .cursor-atmosphere {
+    display: none;
   }
 }
