@@ -26,7 +26,7 @@ const Partnership: React.FC = () => (
       <div className="partnership-orbit partnership-orbit-one" aria-hidden="true" />
       <div className="partnership-orbit partnership-orbit-two" aria-hidden="true" />
       <div className="partnership-hero-copy">
-        <span className="partnership-eyebrow">05 / Partnership</span>
+        <span className="partnership-eyebrow">04 / Partnership</span>
         <h1>Extend what your team <span>can deliver.</span></h1>
         <p>We partner with technology companies, agencies, consultants, and product teams that need additional engineering capability without expanding their internal team.</p>
       </div>
