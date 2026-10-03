@@ -84,7 +84,7 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="explore-links">
-            {navItems.filter((item) => item.path !== '/').map((item) => (
+            {navItems.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
