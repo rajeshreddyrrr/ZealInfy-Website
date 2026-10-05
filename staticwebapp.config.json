@@ -1,0 +1,13 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "*.{css,scss,js,ts,tsx,jsx,png,jpg,jpeg,gif,svg,ico,webp,avif,woff,woff2,ttf,eot,json,map,txt,xml}"
+    ]
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html"
+    }
+  }
+}
