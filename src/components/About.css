@@ -3,7 +3,9 @@
 .about-heading-row { display:grid; grid-template-columns:1.1fr .9fr; gap:4rem; align-items:end; margin-bottom:3.2rem; }
 .about-tag { display:inline-block; margin-bottom:1rem; color:#7dd3fc; font-size:.74rem; font-weight:800; letter-spacing:.19em; text-transform:uppercase; }
 .about-heading-row .section-title { margin-bottom:0; text-align:left; text-transform:none; letter-spacing:-.055em; font-size:clamp(2.8rem,5.5vw,5rem); line-height:.98; }
-.about-intro-copy { max-width:520px; margin-left:auto; color:#9aa9bd; font-size:1.08rem; line-height:1.9; }
+.about-intro { max-width:520px; margin-left:auto; }
+.about-intro-copy { margin:0; color:#9aa9bd; font-size:1.08rem; line-height:1.9; }
+.about-entity { display:block; margin-top:1rem; color:#64748b; font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
 .brand-story { display:grid; grid-template-columns:1fr 150px 1fr; gap:2.5rem; align-items:center; position:relative; padding:3rem 0; }
 .brand-story::before { content:''; position:absolute; left:5%; right:5%; top:50%; height:1px; background:linear-gradient(90deg,transparent,rgba(96,165,250,.2),transparent); }
 .brand-story-word { max-width:480px; position:relative; z-index:1; transition:transform .45s cubic-bezier(.22,1,.36,1); }
