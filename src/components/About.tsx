@@ -37,11 +37,14 @@ const About: React.FC = () => {
             <span className="about-tag">Why ZealInfy exists</span>
             <h2 className="section-title">We don't want technology to stand still.</h2>
           </div>
-          <p className="about-intro-copy">
-            ZealInfy comes from a belief that technology should create momentum —
-            helping people imagine more, build faster, and solve problems that once
-            felt out of reach.
-          </p>
+          <div className="about-intro">
+            <p className="about-intro-copy">
+              ZealInfy comes from a belief that technology should create momentum —
+              helping people imagine more, build faster, and solve problems that once
+              felt out of reach.
+            </p>
+            <span className="about-entity">Legal entity · ZealInfy Software Pvt Ltd</span>
+          </div>
         </div>
 
         <div className="brand-story">
