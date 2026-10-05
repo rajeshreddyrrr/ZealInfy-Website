@@ -27,6 +27,7 @@ const Footer: React.FC = () => {
             <p className="footer-description">
               Where Passion Meets AI.
             </p>
+            <p className="footer-entity">ZealInfy Software Pvt Ltd</p>
           </div>
 
           <div className="footer-navigation">
@@ -50,7 +51,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="footer-bottom">
-          <span>© {currentYear} ZealInfy</span>
+          <span>© {currentYear} ZealInfy Software Pvt Ltd</span>
           <span>Where Passion Meets AI.</span>
           <span>Built with curiosity.</span>
         </div>
